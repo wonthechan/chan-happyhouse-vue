@@ -1,14 +1,22 @@
 module.exports = {
   root: true,
-  env: {
-    node: true
-  },
-  extends: ["plugin:vue/essential", "eslint:recommended", "@vue/prettier"],
   parserOptions: {
-    parser: "babel-eslint"
+    parser: 'babel-eslint',
   },
+  env: {
+    browser: true,
+  },
+  extends: [
+    'plugin:vue/essential',
+    'standard',
+  ],
+  plugins: [
+    'vue',
+  ],
   rules: {
-    "no-console": process.env.NODE_ENV === "production" ? "warn" : "off",
-    "no-debugger": process.env.NODE_ENV === "production" ? "warn" : "off"
-  }
-};
+    'generator-star-spacing': 'off',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'space-before-function-paren': 'off',
+    'comma-dangle': ['error', 'always-multiline'],
+  },
+}

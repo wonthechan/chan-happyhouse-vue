@@ -1,32 +1,44 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
+    <localization></localization>
   </div>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import { mapState } from 'vuex'
+import Localization from '@/localization'
 
-#nav {
-  padding: 30px;
+export default {
+  name: 'app',
+  components: { Localization },
+  computed: {
+    ...mapState(['settings']),
+    ...mapState('user', ['authorized']),
+    nextRoute() {
+      return this.$route.query.redirect || '/'
+    },
+    currentRoute() {
+      return this.$route.path
+    },
+  },
+  mounted() {
+    this.$store.dispatch('user/LOAD_CURRENT_ACCOUNT')
+    this.$store.commit('SET_PRIMARY_COLOR', { color: this.settings.primaryColor })
+    this.$store.commit('SET_THEME', { theme: this.settings.theme })
+  },
+  watch: {
+    '$store.state.settings.theme'(theme) {
+      this.$store.commit('SET_THEME', { theme })
+    },
+    authorized(authorized) {
+      if (authorized && this.currentRoute === '/auth/login') {
+        this.$router.replace(this.nextRoute)
+      }
+    },
+    '$route'(to, from) {
+      const query = Object.assign({}, to.query)
+      this.$store.commit('SETUP_URL_SETTINGS', query)
+    },
+  },
 }
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+</script>

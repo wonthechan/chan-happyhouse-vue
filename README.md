@@ -1,24 +1,15 @@
-# happyhouse
+### Clean UI Pro Vue Admin Template Preview ###
+https://vue.cleanui.cloud
 
-## Project setup
-```
-yarn install
-```
+### Documentation ###
+Please read documentation here https://docs.sellpixels.com
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+### Quick Start ###
+* Install latest node.js: https://nodejs.org​
+* Install latest yarn package manager: https://yarnpkg.com/​
+* Install node modules by running terminal command `yarn install`
+* Run the app `yarn serve`
+* Or build production app `yarn build`
 
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Support ###
+Use GitHub Issues for tracking bugs and creating new feature requests or write to [support@sellpixels.com](mailto:support@sellpixels.com).
