@@ -13,7 +13,7 @@
     }"
     >
       <cui-sidebar />
-      <cui-support-chat />
+      <cui-support-chat v-if="false"/>
 
       <!-- left menu -->
       <cui-menu-left v-if="settings.menuLayoutType === 'left' && !settings.isMobileView" />
@@ -35,7 +35,7 @@
       </div>
 
       <!-- top menu -->
-      <cui-menu-top v-if="settings.menuLayoutType === 'top' && !settings.isMobileView" />
+      <cui-menu-top v-if="settings.menuLayoutType === 'top' && !settings.isMobileView"/>
 
       <a-layout>
         <a-layout-header
@@ -47,7 +47,7 @@
         >
           <cui-topbar />
         </a-layout-header>
-        <cui-breadcrumbs />
+        <!-- <cui-breadcrumbs /> -->
         <a-layout-content style="height: '100%';  position: 'relative'">
           <div class="cui__utils__content">
             <transition :name="settings.routerAnimation" mode="out-in">
@@ -66,7 +66,7 @@
 <script>
 import { mapState } from 'vuex'
 import CuiTopbar from '@/components/cleanui/layout/Topbar'
-import CuiBreadcrumbs from '@/components/cleanui/layout/Breadcrumbs'
+// import CuiBreadcrumbs from '@/components/cleanui/layout/Breadcrumbs'
 import CuiFooter from '@/components/cleanui/layout/Footer'
 import CuiSidebar from '@/components/cleanui/layout/Sidebar'
 import CuiSupportChat from '@/components/cleanui/layout/SupportChat'
@@ -75,7 +75,7 @@ import CuiMenuTop from '@/components/cleanui/layout/Menu/MenuTop'
 
 export default {
   name: 'MainLayout',
-  components: { CuiFooter, CuiTopbar, CuiMenuLeft, CuiMenuTop, CuiBreadcrumbs, CuiSidebar, CuiSupportChat },
+  components: { CuiFooter, CuiTopbar, CuiMenuLeft, CuiMenuTop, CuiSidebar, CuiSupportChat },
   computed: mapState(['settings']),
   data: function () {
     return {

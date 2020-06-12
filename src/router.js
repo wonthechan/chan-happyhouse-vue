@@ -389,6 +389,28 @@ const router = new Router({
           },
           component: () => import('./views/advanced/colors'),
         },
+        // 관심 지역
+        {
+          path: '/interestarea/manage',
+          meta: {
+            title: '관심 지역 관리',
+          },
+          component: () => import('./views/interestarea/manage'),
+        },
+        {
+          path: '/interestarea/stores',
+          meta: {
+            title: '주변 상권',
+          },
+          component: () => import('./views/interestarea/stores'),
+        },
+        {
+          path: '/interestarea/etc',
+          meta: {
+            title: '주변 기타 정보',
+          },
+          component: () => import('./views/advanced/email-templates'),
+        },
       ],
     },
 
