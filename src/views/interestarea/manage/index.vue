@@ -5,28 +5,27 @@
         <div class="card kit__utils__cardMarked kit__utils__cardMarked--primary">
           <div class="card-header card-header-flex">
             <div class="d-flex flex-column justify-content-center mr-auto">
-              <h5 class="mb-0">관심 지역 관리</h5>
+              <h3 class="text-dark font-size-18 font-weight-bold mb-0">관심 지역 관리</h3>
             </div>
           </div>
           <div class="card-body">
-            <h3 class="text-dark font-size-18 font-weight-bold mb-3">관심 지역 등록</h3>
             <div class="form-inline">
               <table class="table table-borderless">
                 <tr>
                   <td align="center">
-                  <select class="form-control" id="sido" v-model="currentSidoCode" @change="getGugunList()">
-                    <option value="0">선택</option>
-                    <option v-for="(sido, index) in sidos" :key="'item_' + index" :value="sido.citycode">{{ sido.city }}</option>
-                  </select>
-                <select class="form-control" id="gugun" v-model="currentGuCode" @change="getDongList()">
-                  <option value="0">선택</option>
-                  <option v-for="(gugun, index) in guguns" :key="'item_' + index" :value="gugun.gucode">{{ gugun.gu }}</option>
-                </select>
-                <select class="form-control" id="dong" v-model="currentDong">
-                    <option value="0">선택</option>
-                    <option v-for="(dong, index) in dongs" :key="'item_' + index" :value="{ dongCode: dong.dongcode, dong: dong.dong }">{{ dong.dong }}</option>
-                </select>
-                    <button class="btn btn-primary" id="registerArea" @click="registerArea()">관심지역 등록</button>
+                  <a-select style="width: 150px" class="form-control" id="sido" v-model="currentSidoCode" @change="getGugunList()">
+                    <a-select-option  value="0">선택</a-select-option >
+                    <a-select-option  v-for="(sido, index) in sidos" :key="'item_' + index" :value="sido.citycode">{{ sido.city }}</a-select-option >
+                  </a-select>
+                <a-select style="width: 150px" class="form-control" id="gugun" v-model="currentGuCode" @change="getDongList()">
+                  <a-select-option value="0">선택</a-select-option>
+                  <a-select-option v-for="(gugun, index) in guguns" :key="'item_' + index" :value="gugun.gucode">{{ gugun.gu }}</a-select-option>
+                </a-select>
+                <a-select style="width: 150px" class="form-control" id="dong" v-model="currentDong">
+                    <a-select-option value="0">선택</a-select-option>
+                    <a-select-option v-for="(dong, index) in dongs" :key="'item_' + index" :value="`${dong.dongcode}/${dong.dong}`">{{ dong.dong }}</a-select-option>
+                </a-select>
+                    <a-button type="primary" id="registerArea" @click="registerArea()">등록</a-button>
                   </td>
                 </tr>
               </table>
@@ -41,7 +40,7 @@
                 </thead>
                 <tbody id="areaTbody">
                   <tr v-for="(area, index) in userAreas" :key="'item_' + index">
-                    <td>{{ area.city }}</td><td>{{ area.gu }}</td><td>{{ area.dong }}</td><td></td><td></td><td></td><td><button @click="deleteArea(area.dongcode)" type="button" class="btn btn-outline-danger btn-sm" style="text-align:right;">삭제</button></td>
+                    <td>{{ area.city }}</td><td>{{ area.gu }}</td><td>{{ area.dong }}</td><td></td><td></td><td></td><td><a-button type="danger" @click="deleteArea(area.dongcode)">삭제</a-button></td>
                   </tr>
                 </tbody>
               </table>
@@ -82,6 +81,14 @@ export default {
         this.sidos = data
       })
   },
+  computed: {
+    currentDongCode() {
+      return this.currentDong.split('/')[0]
+    },
+    currentDongName() {
+      return this.currentDong.split('/')[1]
+    },
+  },
   methods: {
     // 시도 선택 시 구군 데이터 받아오기
     getGugunList() {
@@ -108,15 +115,27 @@ export default {
         .then(({ data }) => {
           console.log(data)
           if (data === 1) {
-            alert('삭제되었습니다.')
+            this.$notification.success({
+              message: '삭제 성공!',
+              description:
+                '선택 하신 관심 지역이 정상적으로 삭제되었습니다.',
+            })
             this.updateUserAreas()
           } else {
-            alert('삭제 중 문제가 발생하였습니다.')
+            this.$notification.error({
+              message: '삭제 실패',
+              description:
+                '삭제 도중에 문제가 발생하였습니다.',
+            })
           }
         })
         .catch((data) => {
           console.log(data)
-          alert('삭제 중 문제가 발생하였습니다.')
+          this.$notification.error({
+            message: '삭제 실패',
+            description:
+              '삭제 도중에 문제가 발생하였습니다.',
+          })
         })
     },
     // 관심 지역 받아오기
@@ -128,23 +147,35 @@ export default {
     },
     // 관심 지역 등록하기
     registerArea() {
-      if (this.currentDong === '0') { // 지역을 선택하지 않은 경우 종료
+      if (this.currentDongCode === '0') { // 지역을 선택하지 않은 경우 종료
         alert('지역을 선택해주세요!')
         return
       }
-      http.post('/areas/interest', { uid: this.uid, dongcode: this.currentDong.dongCode, dong: this.currentDong.dong })
+      http.post('/areas/interest', { uid: this.uid, dongcode: this.currentDongCode, dong: this.currentDongName })
         .then(({ data }) => {
           console.log(data)
           if (data === 1) {
-            alert('등록되었습니다.')
+            this.$notification.success({
+              message: '등록 성공!',
+              description:
+                '선택 하신 관심 지역이 정상적으로 등록되었습니다.',
+            })
             this.updateUserAreas()
           } else {
-            alert('등록 중 문제가 발생하였습니다.')
+            this.$notification.error({
+              message: '등록 실패',
+              description:
+                '등록 도중에 문제가 발생하였습니다.',
+            })
           }
         })
         .catch((data) => {
           console.log(data)
-          alert('등록 중 문제가 발생하였습니다.')
+          this.$notification.error({
+            message: '등록 실패',
+            description:
+              '등록 도중에 문제가 발생하였습니다.',
+          })
         })
     },
   },

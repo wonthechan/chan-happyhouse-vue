@@ -5,16 +5,14 @@
         <strong>Welcome to {{ settings.logo }}</strong>
       </h1>
       <p>
-        Pluggable enterprise-level application framework.
-        <br />An excellent front-end solution for web applications built upon Ant Design.
-        <br />Credentials for testing purposes -
+        Credentials for testing purposes -
         <strong>demo@sellpixels.com</strong> /
         <strong>demo123</strong>
       </p>
     </div>
     <div class="card" :class="$style.container">
       <div class="text-dark font-size-24 mb-3">
-        <strong>Sign in to your account</strong>
+        <strong>로그인</strong>
       </div>
       <div class="mb-4">
         <a-radio-group
@@ -23,18 +21,6 @@
         >
           <a-radio value="firebase">Firebase</a-radio>
           <a-radio value="jwt">JWT</a-radio>
-          <a-tooltip>
-            <template slot="title">
-              <span>Read Docs Guide</span>
-            </template>
-            <a-radio value="auth0" disabled>Auth0</a-radio>
-          </a-tooltip>
-          <a-tooltip>
-            <template slot="title">
-              <span>Read Docs Guide</span>
-            </template>
-            <a-radio value="strapi" disabled>Strapi</a-radio>
-          </a-tooltip>
         </a-radio-group>
       </div>
       <a-form class="mb-4" :form="form" @submit="handleSubmit">
@@ -42,7 +28,7 @@
           <a-input
             size="large"
             placeholder="Email"
-            v-decorator="['email', { initialValue: 'demo@sellpixels.com', rules: [{ required: true, message: 'Please input your username!' }]}]"
+            v-decorator="['email', { initialValue: 'demo@sellpixels.com', rules: [{ required: true, message: '아이디를 입력해주세요!' }]}]"
           />
         </a-form-item>
         <a-form-item>
@@ -50,7 +36,7 @@
             size="large"
             placeholder="Password"
             type="password"
-            v-decorator="['password', {initialValue: 'demo123', rules: [{ required: true, message: 'Please input your Password!' }]}]"
+            v-decorator="['password', {initialValue: 'demo123', rules: [{ required: true, message: '비밀번호를 입력해주세요!' }]}]"
           />
         </a-form-item>
         <a-button
@@ -60,22 +46,28 @@
           class="text-center w-100"
           :loading="loading"
         >
-          <strong>Sign in</strong>
+          <strong>로그인</strong>
         </a-button>
       </a-form>
-      <router-link to="/auth/forgot-password" class="kit__utils__link font-size-16">Forgot Password?</router-link>
+        <a @click.prevent="loginWithKakao()">
+          <img src="https://developers.kakao.com/tool/resource/static/img/button/login/full/ko/kakao_login_medium_wide.png" width="416px" height="53px">
+        </a>
+      <router-link to="/auth/forgot-password" class="kit__utils__link font-size-16">비밀번호 찾기</router-link>
     </div>
     <div class="text-center pt-2 mb-auto">
-      <span class="mr-2">Don't have an account?</span>
-      <router-link to="/auth/register" class="kit__utils__link font-size-16">Sign up</router-link>
+      <span class="mr-2">아직 회원이 아니세요?</span>
+      <router-link to="/auth/register" class="kit__utils__link font-size-16">이메일로 회원가입</router-link>
     </div>
   </div>
 </template>
 <script>
+
 import { mapState } from 'vuex'
 
 export default {
   name: 'CuiLogin',
+  components: {
+  },
   computed: {
     ...mapState(['settings']),
     loading() {
@@ -87,7 +79,40 @@ export default {
       form: this.$form.createForm(this),
     }
   },
+  created() {
+    this.changeAuthProvider('firebase')
+  },
   methods: {
+    onSuccessLogin(authObj) {
+      console.log('success')
+      this.changeAuthProvider('kakao')
+      this.$store.dispatch('user/KAKAO_LOGIN', { payload: authObj })
+    },
+    onFailureLogin(data) {
+      console.log('failure')
+      console.log(data)
+    },
+    loginWithKakao() {
+      if (!window.Kakao.Auth.getAccessToken()) { // 사용자 토근이 만료된 경우 (로그아웃된 경우)
+        window.Kakao.Auth.loginForm({
+          success: (authObj) => {
+            this.onSuccessLogin(authObj) // 카카오 로그인 성공 콜백
+          },
+          fail: (err) => {
+            this.onFailureLogin(err)
+          },
+        })
+      } else { // 사용자 토근이 존재하는 경우 (바로 로그인)
+        window.Kakao.Auth.login({
+          success: (response) => {
+            this.onSuccessLogin(response) // 카카오 로그인 성공 콜백
+          },
+          fail: (error) => {
+            this.onFailureLogin(error)
+          },
+        })
+      }
+    },
     changeAuthProvider(value) {
       this.$store.commit('CHANGE_SETTING', { setting: 'authProvider', value })
     },

@@ -16,7 +16,7 @@ const STORED_SETTINGS = storedSettings => {
 export default {
   state: {
     ...STORED_SETTINGS({
-      authProvider: 'firebase', // firebase, jwt
+      authProvider: 'firebase', // firebase, jwt, kakao
       logo: 'Happy House',
       locale: 'en-US',
       isSidebarOpen: false,

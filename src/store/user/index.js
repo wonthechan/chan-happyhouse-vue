@@ -4,8 +4,11 @@ import router from '@/router'
 
 import * as firebase from '@/services/firebase'
 import * as jwt from '@/services/jwt'
+import * as kakao from '@/services/kakao'
 
 const mapAuthProviders = {
+  // 밑에 firebase랑 jwt는 나중에 뺄 예정
+  // 우리 DB 회원 테이블이랑 연동하는거 추가해야함
   firebase: {
     login: firebase.login,
     register: firebase.register,
@@ -18,6 +21,13 @@ const mapAuthProviders = {
     currentAccount: jwt.currentAccount,
     logout: jwt.logout,
   },
+  // 카카오 로그인
+  kakao: {
+    // login: kakao.login,
+    // register: kakao.register,
+    currentAccount: kakao.currentAccount,
+    logout: kakao.logout,
+  },
 }
 
 Vue.use(Vuex)
@@ -25,11 +35,11 @@ Vue.use(Vuex)
 export default {
   namespaced: true,
   state: {
-    id: '',
-    name: '',
-    role: '',
-    email: '',
-    avatar: '',
+    id: '', // ID 정보
+    name: '', // 이름
+    role: '', // 역할 (필요 없음)
+    email: '', // 이메일
+    avatar: '', // 필요없음
     authorized: process.env.VUE_APP_AUTHENTICATED || false, // false is default value
     loading: false,
   },
@@ -41,6 +51,16 @@ export default {
     },
   },
   actions: {
+    KAKAO_LOGIN({ commit, dispatch, rootState }, { payload }) {
+      // 사용자 정보 요청 하고 현재 사용자 정보 갱신
+      dispatch('LOAD_CURRENT_ACCOUNT').then(() => {
+        Vue.prototype.$notification.success({
+          message: `${rootState.user.name}님 반갑습니다.`,
+          description: '정상적으로 로그인 처리되었습니다.',
+        })
+      })
+    },
+
     LOGIN({ commit, dispatch, rootState }, { payload }) {
       const { email, password } = payload
       commit('SET_STATE', {
@@ -50,10 +70,11 @@ export default {
       const login = mapAuthProviders[rootState.settings.authProvider].login
       login(email, password).then(success => {
         if (success) {
-          dispatch('LOAD_CURRENT_ACCOUNT')
-          Vue.prototype.$notification.success({
-            message: 'Logged In',
-            description: 'You have successfully logged in to Air UI Vue Admin Template!',
+          dispatch('LOAD_CURRENT_ACCOUNT').then(() => {
+            Vue.prototype.$notification.success({
+              message: `${rootState.user.name}님 반갑습니다.`,
+              description: '정상적으로 로그인 처리되었습니다.',
+            })
           })
         }
         if (!success) {
@@ -86,25 +107,27 @@ export default {
       })
     },
     LOAD_CURRENT_ACCOUNT({ commit, rootState }) {
-      commit('SET_STATE', {
-        loading: true,
-      })
-
-      const currentAccount = mapAuthProviders[rootState.settings.authProvider].currentAccount
-      currentAccount().then(response => {
-        if (response) {
-          const { id, email, name, avatar, role } = response
-          commit('SET_STATE', {
-            id,
-            name,
-            email,
-            avatar,
-            role,
-            authorized: true,
-          })
-        }
+      return new Promise((resolve, reject) => {
         commit('SET_STATE', {
-          loading: false,
+          loading: true,
+        })
+        const currentAccount = mapAuthProviders[rootState.settings.authProvider].currentAccount
+        currentAccount().then(response => {
+          if (response) {
+            const { id, email, name, avatar, role } = response
+            commit('SET_STATE', {
+              id,
+              name,
+              email,
+              avatar,
+              role,
+              authorized: true,
+            })
+          }
+          commit('SET_STATE', {
+            loading: false,
+          })
+          resolve()
         })
       })
     },
