@@ -9,9 +9,7 @@
   >
     <div :class="$style.logoContainer">
       <div :class="$style.logo">
-        <img src="resources/images/logo.svg" class="mr-2" alt="Clean UI" />
-        <div :class="$style.name">{{ settings.logo }}</div>
-        <div v-if="settings.logo === 'Clean UI Pro'" :class="$style.descr">Vue</div>
+        <!-- <div class="font-size-18 font-weight-bold">{{ settings.logo }}</div> -->
       </div>
     </div>
     <div :class="$style.navigation">

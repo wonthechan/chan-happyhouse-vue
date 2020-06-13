@@ -1,7 +1,8 @@
 <template>
   <div :class="$style.topbar">
-    <div class="mr-4" v-if="false">
-      <cui-fav-pages v-if="false"/>
+    <div class="mr-4">
+      <a-icon style="font-size: 25px;" class="mr-2" type="home" />
+      <span style="font-size: 25px;" class="font-weight-bold">Happy House</span>
     </div>
     <div class="mr-auto">
       <cui-search v-if="false"/>
@@ -48,7 +49,6 @@ import CuiSearch from './Search'
 import CuiLanguageSwitcher from './LanguageSwitcher'
 import CuiActions from './Actions'
 import CuiUserMenu from './UserMenu'
-import CuiFavPages from './FavPages'
 
 // MenuTop 관련
 import store from 'store'
@@ -64,7 +64,6 @@ export default {
     CuiLanguageSwitcher,
     CuiActions,
     CuiUserMenu,
-    CuiFavPages,
     SubMenu, // MenuTop
     Item,
   },

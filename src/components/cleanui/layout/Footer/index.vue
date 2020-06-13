@@ -1,23 +1,15 @@
 <template>
   <div :class="$style.footer">
     <div :class="$style.footerInner">
-      <a
-        href="https://sellpixels.com"
-        target="_blank"
-        rel="noopener noreferrer"
+      <span
         :class="$style.logo"
       >
-        SELLPIXELS
+        HAPPY HOUSE
         <span></span>
-      </a>
+      </span>
       <br />
       <p class="mb-0">
-        Copyright © 2017-2020 Mdtk Soft |
-        <a
-          href="https://www.mediatec.org/privacy"
-          target="_blank"
-          rel="noopener noreferrer"
-        >Privacy Policy</a>
+        Spring Semester Final Web Project @ SSAFY
       </p>
     </div>
   </div>

@@ -34,17 +34,17 @@ export const getMenuData = [
   },
   {
     title: '고객지원',
-    key: 'ecommerce',
+    key: 'help',
     icon: 'fe fe-shopping-cart',
     children: [
       {
         title: '공지사항',
-        key: 'ecommerceDashboard',
-        url: '/ecommerce/dashboard',
+        key: 'helpNotices',
+        url: '/help/notices',
       },
       {
         title: 'QnA',
-        key: 'ecommerceOrders',
+        key: 'helpQnA',
         url: '/ecommerce/orders',
       },
     ],

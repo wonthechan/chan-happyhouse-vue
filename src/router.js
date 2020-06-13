@@ -411,6 +411,44 @@ const router = new Router({
           },
           component: () => import('./views/advanced/email-templates'),
         },
+        // 고객 지원
+        {
+          path: '/help/notices',
+          meta: {
+            title: '공지사항',
+          },
+          component: () => import('./views/help/notices'),
+          children: [
+            {
+              path: '/help/notices/list',
+              meta: {
+                title: '공지사항 목록',
+              },
+              component: () => import('./views/help/notices/list'),
+            },
+            {
+              path: '/help/notices/register',
+              meta: {
+                title: '공지사항 등록',
+              },
+              component: () => import('./views/help/notices/register'),
+            },
+            {
+              path: '/help/notices/update/:id',
+              meta: {
+                title: '공지사항 수정',
+              },
+              component: () => import('./views/help/notices/update'),
+            },
+            {
+              path: '/help/notices/detail/:id',
+              meta: {
+                title: '공지사항 상세',
+              },
+              component: () => import('./views/help/notices/detail'),
+            },
+          ],
+        },
       ],
     },
 

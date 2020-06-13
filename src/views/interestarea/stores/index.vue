@@ -1,37 +1,45 @@
 <template>
   <div>
     <div class="row">
-      <div class="col-lg-6">
-        <div class="card kit__utils__cardMarked kit__utils__cardMarked--primary">
-          <div class="card-header card-header-flex">
-            <div class="d-flex flex-column justify-content-center mr-auto">
-              <h3 class="text-dark font-size-18 font-weight-bold mb-0">나의 관심 지역 선택</h3>
+      <div class="col">
+        <div class="row-lg-4 mb-3">
+          <a-page-header
+            style="border: 1px solid rgb(235, 237, 240)"
+            title="관심 지역 주변 상권"
+            :breadcrumb="{ props: { routes } }"
+            sub-title="관심 지역 주변의 상권 정보를 확인할 수 있습니다."
+          />
+        </div>
+        <div class="row-lg-4">
+          <div class="card kit__utils__cardMarked kit__utils__cardMarked--primary">
+            <div class="card-header">
+              <a-icon class="font-size-18 mr-2" type="search" />
+              <span class="text-dark font-size-18 font-weight-bold mb-0">나의 관심 지역 선택</span>
             </div>
-          </div>
-          <div class="card-body">
-            <div>
-              <table class="table table-hover">
-                <thead>
-                  <tr>
-                    <th>시 / 도</th><th>군 / 구</th><th>동</th><th></th><th></th><th></th><th></th>
-                  </tr>
-                </thead>
-                <tbody id="areaTbody">
-                  <tr v-for="(area, index) in userAreas" :key="'item_' + index">
-                    <td>{{ area.city }}</td><td>{{ area.gu }}</td><td>{{ area.dong }}</td><td></td><td></td><td></td><td><a-button shape="circle" icon="search" @click="searchStore(area.dongcode, area.dong)"/></td>
-                  </tr>
-                </tbody>
-              </table>
+            <div class="card-body">
+              <div>
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>시 / 도</th><th>군 / 구</th><th>동</th><th></th><th></th><th></th><th></th>
+                    </tr>
+                  </thead>
+                  <tbody id="areaTbody">
+                    <tr v-for="(area, index) in userAreas" :key="'item_' + index">
+                      <td>{{ area.city }}</td><td>{{ area.gu }}</td><td>{{ area.dong }}</td><td></td><td></td><td></td><td><a-button shape="circle" icon="search" @click="searchStore(area.dongcode, area.dong)"/></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-lg-6">
+      <div class="col-lg-8">
         <div class="card kit__utils__cardMarked kit__utils__cardMarked--primary" v-if="TOTAL_LIST_ITEM_COUNT > 0">
-          <div class="card-header card-header-flex">
-            <div class="d-flex flex-column justify-content-center mr-auto">
-              <h3 class="text-dark font-size-18 font-weight-bold mb-0">{{ this.currentDong.dong }} 상권 정보</h3>
-            </div>
+          <div class="card-header">
+            <a-icon class="font-size-18 mr-2" type="shop" />
+            <span class="text-dark font-size-18 font-weight-bold mb-0">{{ this.currentDong.dong }} 상권 정보</span>
           </div>
           <div class="card-body">
             <div>
@@ -99,6 +107,20 @@ export default {
       startPageIndex: 0,
       endPageIndex: 0,
       prev: false,
+      routes: [
+        {
+          path: '',
+          breadcrumbName: 'Home',
+        },
+        {
+          path: '',
+          breadcrumbName: '관심 지역',
+        },
+        {
+          path: '',
+          breadcrumbName: '관심 지역 주변 상권',
+        },
+      ],
     }
   },
   created() {

@@ -1,27 +1,34 @@
 <template>
   <div>
     <div class="row">
-      <div class="col-lg-12">
+      <div class="col-lg-3">
+        <a-page-header
+          style="border: 1px solid rgb(235, 237, 240)"
+          title="관심 지역 관리"
+          :breadcrumb="{ props: { routes } }"
+          sub-title="관심 지역을 등록하고 제거할 수 있습니다."
+        />
+      </div>
+      <div class="col-lg-9">
         <div class="card kit__utils__cardMarked kit__utils__cardMarked--primary">
-          <div class="card-header card-header-flex">
-            <div class="d-flex flex-column justify-content-center mr-auto">
-              <h3 class="text-dark font-size-18 font-weight-bold mb-0">관심 지역 관리</h3>
-            </div>
+          <div class="card-header">
+              <a-icon class="font-size-18 mr-2" type="star" />
+              <span class="text-dark font-size-18 font-weight-bold mb-0">관심 지역 관리</span>
           </div>
           <div class="card-body">
             <div class="form-inline">
               <table class="table table-borderless">
                 <tr>
                   <td align="center">
-                  <a-select style="width: 150px" class="form-control" id="sido" v-model="currentSidoCode" @change="getGugunList()">
+                  <a-select style="width: 150px" class="form-control mr-3" id="sido" v-model="currentSidoCode" @change="getGugunList()">
                     <a-select-option  value="0">선택</a-select-option >
                     <a-select-option  v-for="(sido, index) in sidos" :key="'item_' + index" :value="sido.citycode">{{ sido.city }}</a-select-option >
                   </a-select>
-                <a-select style="width: 150px" class="form-control" id="gugun" v-model="currentGuCode" @change="getDongList()">
+                <a-select style="width: 150px" class="form-control mr-3" id="gugun" v-model="currentGuCode" @change="getDongList()">
                   <a-select-option value="0">선택</a-select-option>
                   <a-select-option v-for="(gugun, index) in guguns" :key="'item_' + index" :value="gugun.gucode">{{ gugun.gu }}</a-select-option>
                 </a-select>
-                <a-select style="width: 150px" class="form-control" id="dong" v-model="currentDong">
+                <a-select style="width: 150px" class="form-control mr-3" id="dong" v-model="currentDong">
                     <a-select-option value="0">선택</a-select-option>
                     <a-select-option v-for="(dong, index) in dongs" :key="'item_' + index" :value="`${dong.dongcode}/${dong.dong}`">{{ dong.dong }}</a-select-option>
                 </a-select>
@@ -40,7 +47,7 @@
                 </thead>
                 <tbody id="areaTbody">
                   <tr v-for="(area, index) in userAreas" :key="'item_' + index">
-                    <td>{{ area.city }}</td><td>{{ area.gu }}</td><td>{{ area.dong }}</td><td></td><td></td><td></td><td><a-button type="danger" @click="deleteArea(area.dongcode)">삭제</a-button></td>
+                    <td>{{ area.city }}</td><td>{{ area.gu }}</td><td>{{ area.dong }}</td><td></td><td></td><td></td><td><a-button type="danger" icon="delete" @click="deleteArea(area.dongcode)"></a-button></td>
                   </tr>
                 </tbody>
               </table>
@@ -70,6 +77,20 @@ export default {
       sidos: [],
       guguns: [],
       dongs: [],
+      routes: [
+        {
+          path: '',
+          breadcrumbName: 'Home',
+        },
+        {
+          path: '',
+          breadcrumbName: '관심 지역',
+        },
+        {
+          path: '',
+          breadcrumbName: '관심 지역 관리',
+        },
+      ],
     }
   },
   created() {

@@ -19,6 +19,10 @@ import './registerServiceWorker'
 // mocking api
 import './services/axios/fakeApi'
 
+// moment
+import vueMoment from 'vue-moment'
+
+Vue.use(vueMoment)
 Vue.use(BootstrapVue)
 Vue.use(VueLayers)
 

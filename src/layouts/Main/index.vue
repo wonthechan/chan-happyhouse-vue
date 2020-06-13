@@ -12,7 +12,7 @@
       'cui__layout__borderless': settings.isBorderless,
     }"
     >
-      <cui-sidebar />
+      <cui-sidebar v-if="false" />
       <cui-support-chat v-if="false"/>
 
       <!-- left menu -->

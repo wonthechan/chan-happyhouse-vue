@@ -1,5 +1,5 @@
 <template>
-  <a-dropdown :trigger="['click']" placement="bottomLeft">
+  <a-dropdown class="ml-4" :trigger="['click']" placement="bottomLeft">
     <div :class="$style.dropdown">
       <a-badge>
         <a-avatar shape="square" icon="user" size="large" :class="$style.avatar" />
