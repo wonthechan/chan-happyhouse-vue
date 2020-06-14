@@ -41,6 +41,8 @@ export default {
       isCardShadow: true,
       isSquaredBorders: false,
       isBorderless: false,
+      // 가장 상단에 있는 네비게이션바 숨기기
+      isTopNavFolded: true,
     }),
   },
   mutations: {

@@ -14,64 +14,62 @@
       <a-menu-divider />
       <a-menu-item>
         <a variant="primary" v-b-modal.modal-5>마이 페이지</a>
-       <b-modal id="modal-5"
-       title="내 정보"
-      :header-bg-variant="headerBgVariant"
-      :header-text-variant="headerTextVariant"
-      hide-footer="true"
-       centered>
-             <div class="mb-5">
-      <b-card bg-variant="light">
-      <a-form class="mb-4" :form="form">
-        <label> 아이디</label>
-        <a-form-item>
-          <a-input
-            size="large"
-            readonly="true"
-            :placeholder="id"
-            v-decorator="['id', {rules: [{ required: true, message: 'Please input your full id' }]}]"
-          />
-        </a-form-item>
-        <label> 이름</label>
-        <a-form-item>
-          <a-input
-            size="large"
-            :placeholder="name"
-            v-decorator="['name', {rules: [{ required: true, message: 'Please input your name' }]}]"
-         v-model="name"
-          />
-        </a-form-item>
-        <label> 전화번호</label>
-        <a-form-item>
-          <a-input
-            size="large"
-            :placeholder="phone"
-            v-decorator="['phone', {rules: [{ required: true, message: 'Please input your phone number' }]}]"
-          v-model="phone"
-          />
-        </a-form-item>
-<label> 주소</label>
-         <a-form-item>
-          <a-input
-            size="large"
-           :placeholder="address"
-            v-decorator="['address', {rules: [{ required: true, message: 'Please input your address' }]}]"
-          v-model="address" />
-        </a-form-item>
-<label> 비밀번호</label>
-         <a-form-item>
-          <a-input
-            size="large"
-            type="password"
-            v-decorator="['password', {rules: [{ required: true, message: 'Please input your password' }]}]"
-          v-model="password" />
-        </a-form-item>
-      </a-form>
-      </b-card>
-    </div>
-  <b-button variant="success" @click="updateUser">수정하기</b-button>
-   <b-button variant="danger" @click="deleteUser">삭제하기</b-button>
-      </b-modal>
+        <b-modal id="modal-5"
+          title="내 정보"
+          hide-footer="true"
+          centered>
+          <div class="mb-5">
+            <b-card bg-variant="light">
+              <a-form class="mb-4" :form="form">
+                <label> 아이디</label>
+                <a-form-item>
+                  <a-input
+                    size="large"
+                    readonly="true"
+                    :placeholder="id"
+                    v-decorator="['id', {rules: [{ required: true, message: 'Please input your full id' }]}]"
+                  />
+                </a-form-item>
+                <label> 이름</label>
+                <a-form-item>
+                  <a-input
+                    size="large"
+                    :placeholder="name"
+                    v-decorator="['name', {rules: [{ required: true, message: 'Please input your name' }]}]"
+                v-model="name"
+                  />
+                </a-form-item>
+                <label> 전화번호</label>
+                <a-form-item>
+                  <a-input
+                    size="large"
+                    :placeholder="phone"
+                    v-decorator="['phone', {rules: [{ required: true, message: 'Please input your phone number' }]}]"
+                  v-model="phone"
+                  />
+                </a-form-item>
+                <label> 주소</label>
+                <a-form-item>
+                  <a-input
+                    size="large"
+                  :placeholder="address"
+                    v-decorator="['address', {rules: [{ required: true, message: 'Please input your address' }]}]"
+                  v-model="address" />
+                </a-form-item>
+                <label> 비밀번호</label>
+                <a-form-item>
+                  <a-input
+                    size="large"
+                    type="password"
+                    v-decorator="['password', {rules: [{ required: true, message: 'Please input your password' }]}]"
+                  v-model="password" />
+                </a-form-item>
+              </a-form>
+            </b-card>
+          </div>
+          <b-button variant="success" @click="updateUser">수정하기</b-button>
+          <b-button variant="danger" @click="deleteUser">삭제하기</b-button>
+        </b-modal>
       </a-menu-item>
       <a-menu-divider />
       <a-menu-item>
@@ -96,6 +94,7 @@ export default {
   },
   data: function () {
     return {
+      form: this.$form.createForm(this),
       count: 7,
       id: this.$store.state.user.id,
       name: this.$store.state.user.name,

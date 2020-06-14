@@ -60,10 +60,25 @@ export default {
   ],
   data() {
     return {
-      detailModalTitle: 'test',
       colSize: 3,
       storeInfo: {},
-      modalBodyStyle: { height: '700' },
+      // map data
+      // width: 600,
+      // height: 600,
+      // info: false,
+      // marker: null,
+      // count: 1,
+      // map: null,
+      // isCTT: false,
+      // mapOptions: {
+      //   lat: 0,
+      //   lng: 0,
+      //   zoom: 10,
+      //   zoomControl: true,
+      //   zoomControlOptions: { position: 'TOP_RIGHT' },
+      //   mapTypeControl: true,
+      // },
+      // initLayers: ['BACKGROUND', 'BACKGROUND_DETAIL', 'POI_KOREAN', 'TRANSIT', 'ENGLISH', 'CHINESE', 'JAPANESE'],
     }
   },
   created() {
