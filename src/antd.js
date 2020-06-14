@@ -5,7 +5,7 @@ import {
   Carousel, Input, Calendar, Badge, Slider, Form, Tooltip, Select, Switch,
   Tag, Affix, Spin, Alert, Checkbox, Tabs, Pagination, notification, Drawer,
   Cascader, DatePicker, TimePicker, Divider, Anchor, AutoComplete, BackTop, Collapse, Card, List, Popover,
-  Tree, Timeline, Row, Col, Transfer, Modal, message, Popconfirm, Skeleton, ConfigProvider, Comment, PageHeader,
+  Tree, Timeline, Row, Col, Transfer, Modal, message, Popconfirm, Skeleton, ConfigProvider, Comment, PageHeader, Descriptions,
 } from 'ant-design-vue'
 
 Vue.use(Skeleton)
@@ -62,6 +62,8 @@ Vue.use(BackTop)
 Vue.use(ConfigProvider)
 Vue.use(Comment)
 Vue.use(PageHeader)
+Vue.use(Descriptions)
 
 Vue.prototype.$notification = notification
 Vue.prototype.$message = message
+Vue.prototype.$confirm = Modal.confirm

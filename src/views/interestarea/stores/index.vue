@@ -52,7 +52,7 @@
                   </tr>
                 </thead>
                 <tbody id="areaTbody">
-                  <tr style="cursor:pointer" v-for="(store, index) in stores" :key="'store' + index">
+                  <tr style="cursor:pointer" v-for="(store, index) in stores" :key="'store' + index" @click="showDetailModal(store.no)"> <!-- 클릭 시 상세 모달 로드 -->
                     <td class="small">{{ store.shopname }}</td><td class="small">{{ store.codename4 }}</td><td class="small">{{ store.jibuaddress }}</td>
                   </tr>
                 </tbody>
@@ -82,14 +82,23 @@
         </div>
       </div>
     </div>
+    <!-- Modal -->
+    <store-detail-modal
+      @closeModalEvent="closeDetailModal()"
+      :isVisible="visible"
+      :storeNo="detailStoreNo"
+    >
+    </store-detail-modal>
   </div>
 </template>
 <script>
 import http from '@/util/http-common.js'
+import StoreDetailModal from './StoreDetailModal'
 
 export default {
   name: 'interestareaStores',
   components: {
+    StoreDetailModal,
   },
   data() {
     return {
@@ -121,6 +130,9 @@ export default {
           breadcrumbName: '관심 지역 주변 상권',
         },
       ],
+      visible: false, // 모달 창 보이기/안보이기
+      detailModalTitle: '',
+      detailStoreNo: -1,
     }
   },
   created() {
@@ -219,6 +231,15 @@ export default {
     },
     range(start, end) {
       return Array(end - start + 1).fill().map((_, idx) => start + idx)
+    },
+    // 상권 상세 정보 모달 보이기
+    showDetailModal(no) {
+      this.detailStoreNo = no
+      this.visible = true
+    },
+    // 모달창 닫기
+    closeDetailModal() {
+      this.visible = false
     },
   },
 }

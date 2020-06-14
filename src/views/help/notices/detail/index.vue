@@ -3,14 +3,14 @@
     <div class="card">
       <div class="card-body">
         <div class="mb-3">
-          <h2
-            class="text-dark font-weight-bold"
-          >{{ noticeTitle }}</h2>
+          <span
+            class="font-size-30 font-weight-bold"
+          >{{ noticeTitle }}</span>
         </div>
         <hr/>
-        <div class="height-100 mb-3">
-          <span class="font-weight-bold">{{ noticeWriter }}</span><br>
-          <span>{{ noticeDate }}</span> 에 작성됨
+        <div class="mb-5">
+          <span class="mr-3"><a-icon class="mr-1" type="clock-circle" theme="filled" />{{ noticeDate }}</span><span class="mr-3">|</span>
+          <span class="font-weight-bold"><a-icon class="mr-1" type="user" />{{ noticeWriter }}</span>
         </div>
         <div v-html="noticeContent">
         </div>
@@ -18,7 +18,7 @@
     </div>
     <div>
       <a-button class="mr-3 mb-3" icon="edit" @click="moveToUpdatePage()">수정하기</a-button>
-      <a-button type="danger" icon="delete" @click="deleteNotice()">삭제하기</a-button><br>
+      <a-button type="danger" icon="delete" @click="showDeleteConfirm()">삭제하기</a-button><br>
       <a-button icon="left" @click="moveToListPage()">목록으로 돌아가기</a-button>
     </div>
   </div>
@@ -90,6 +90,21 @@ export default {
           })
           this.moveToListPage()
         })
+    },
+    // 삭제 확인 모달
+    showDeleteConfirm() {
+      this.$confirm({
+        title: '정말로 삭제하시겠습니까?',
+        content: '삭제된 게시글은 복구할 수 없습니다.',
+        okText: '삭제',
+        okType: 'danger',
+        cancelText: '취소',
+        onOk: () => {
+          this.deleteNotice()
+        },
+        onCancel() {
+        },
+      })
     },
   },
 }

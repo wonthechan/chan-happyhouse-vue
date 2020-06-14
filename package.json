@@ -34,6 +34,7 @@
     "vue-echarts": "^4.0.3",
     "vue-i18n": "^8.17.4",
     "vue-moment": "^4.1.0",
+    "vue-naver-maps": "^0.12.1",
     "vue-nprogress": "^0.1.5",
     "vue-page-title": "^1.2.1",
     "vue-quill-editor": "^3.0.6",

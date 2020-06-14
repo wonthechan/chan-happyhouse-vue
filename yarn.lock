@@ -10564,6 +10564,13 @@ vue-moment@^4.1.0:
   dependencies:
     moment "^2.19.2"
 
+vue-naver-maps@^0.12.1:
+  version "0.12.1"
+  resolved "https://registry.yarnpkg.com/vue-naver-maps/-/vue-naver-maps-0.12.1.tgz#7de0415e425c780db44946f4b87810dd8e54bcc2"
+  integrity sha512-VTnUhfqVOobygSS9thuIxcr8QwJ+uT2IvgFn57O/vP5BmxCFx/d0eTHlufBGgvIVmBi3/5n7BkqgIKukQYr+VA==
+  dependencies:
+    vue "^2.6.11"
+
 vue-nprogress@^0.1.5:
   version "0.1.5"
   resolved "https://registry.yarnpkg.com/vue-nprogress/-/vue-nprogress-0.1.5.tgz#574b412f1034012daaf46299d5505d5812f406e6"

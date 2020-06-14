@@ -22,6 +22,14 @@ import './services/axios/fakeApi'
 // moment
 import vueMoment from 'vue-moment'
 
+// naver map api
+import naver from 'vue-naver-maps'
+Vue.use(naver, {
+  clientID: '0kmpf0u5gz',
+  useGovAPI: false, // 공공 클라우드 API 사용 (선택)
+  subModules: '', // 서브모듈 (선택)
+})
+
 Vue.use(vueMoment)
 Vue.use(BootstrapVue)
 Vue.use(VueLayers)
