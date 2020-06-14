@@ -17,7 +17,7 @@
       </div>
     </div>
     <div>
-      <a-button class="mr-3 mb-3" type="primary" icon="edit" @click="moveToUpdatePage()">수정하기</a-button>
+      <a-button class="mr-3 mb-3" icon="edit" @click="moveToUpdatePage()">수정하기</a-button>
       <a-button type="danger" icon="delete" @click="deleteNotice()">삭제하기</a-button><br>
       <a-button icon="left" @click="moveToListPage()">목록으로 돌아가기</a-button>
     </div>

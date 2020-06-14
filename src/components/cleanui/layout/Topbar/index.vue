@@ -25,7 +25,7 @@
     </div> -->
     <a-menu :mode="'horizontal'" :selectedKeys="selectedKeys" @click="handleClick">
       <template v-for="item in menuData">
-        <template v-if="!item.roles || item.roles.includes(user.role)">
+        <template v-if="true || !item.roles || item.roles.includes(user.role)">
           <item
             v-if="!item.children && !item.category"
             :menu-info="item"

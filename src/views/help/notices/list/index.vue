@@ -5,7 +5,7 @@
         <!-- <h5 class="mb-0">공지사항</h5> -->
       </div>
       <div class="d-flex flex-column justify-content-center">
-        <a class="btn btn-primary" href="javascript: void(0);" @click.prevent="moveToRegisterPage()">새 공지사항 작성</a>
+        <a-button type="primary" icon="form" @click.prevent="moveToRegisterPage()">새 공지사항 작성</a-button>
       </div>
     </div>
     <div class="card-body">
