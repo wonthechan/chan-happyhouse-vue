@@ -87,8 +87,7 @@
       @closeModalEvent="closeDetailModal()"
       :isVisible="visible"
       :storeNo="detailStoreNo"
-    >
-    </store-detail-modal>
+    />
   </div>
 </template>
 <script>

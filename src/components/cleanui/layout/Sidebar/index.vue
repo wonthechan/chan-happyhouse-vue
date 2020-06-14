@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="false">
     <div
       :class="{[$style.cui__sidebar]: true, [$style.cui__sidebar__toggled]: settings.isSidebarOpen}"
     >

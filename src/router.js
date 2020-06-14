@@ -409,7 +409,7 @@ const router = new Router({
           meta: {
             title: '주변 기타 정보',
           },
-          component: () => import('./views/advanced/email-templates'),
+          component: () => import('./views/auth/under-construction'),
         },
         // 고객 지원
         {
@@ -499,6 +499,13 @@ const router = new Router({
             title: 'Lockscreen',
           },
           component: () => import('./views/auth/lockscreen'),
+        },
+        {
+          path: '/auth/under-construction',
+          meta: {
+            title: 'UnderConstruction',
+          },
+          component: () => import('./views/auth/under-construction'),
         },
       ],
     },

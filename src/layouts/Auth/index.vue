@@ -1,8 +1,6 @@
 <template>
   <a-layout>
     <a-layout-content>
-      <cui-sidebar />
-      <cui-support-chat />
       <div
         :class="{
           [$style.container]: true,
@@ -20,16 +18,13 @@
           [$style.topbarGray]: settings.isGrayTopbar,
         }"
         >
-          <div :class="$style.logoContainer">
-            <div :class="$style.logo">
-              <img src="resources/images/logo.svg" class="mr-2" alt="Clean UI" />
-              <div :class="$style.name">{{ settings.logo }}</div>
-              <div v-if="settings.logo === 'Clean UI Pro'" :class="$style.descr">Vue</div>
-            </div>
+          <div class="mr-4">
+            <a-icon style="font-size: 25px;" class="mr-2" type="home" />
+            <span style="font-size: 25px;" class="font-weight-bold">Happy House</span>
           </div>
           <div class="d-none d-sm-block">
-            <span class="mr-2">Don't have an account?</span>
-            <router-link to="/auth/register" class="font-size-16 kit__utils__link">Sign up</router-link>
+            <span class="mr-2">계정이 없으신가요?</span>
+            <router-link to="/auth/register" class="font-size-16 kit__utils__link">회원가입</router-link>
           </div>
         </div>
         <div :class="$style.containerInner">
@@ -59,12 +54,7 @@
             </li>
           </ul>
           <div class="text-center">
-            Copyright © 2017-2020 Mdtk Soft |
-            <a
-              href="https://www.mediatec.org/privacy"
-              target="_blank"
-              rel="noopener noreferrer"
-            >Privacy Policy</a>
+            Spring Semester Final Web Project @ <a href="https://www.ssafy.com" target="_blank">SSAFY</a>
           </div>
         </div>
       </div>
@@ -74,12 +64,9 @@
 
 <script>
 import { mapState } from 'vuex'
-import CuiSidebar from '@/components/cleanui/layout/Sidebar'
-import CuiSupportChat from '@/components/cleanui/layout/SupportChat'
 
 export default {
   name: 'AuthLayout',
-  components: { CuiSidebar, CuiSupportChat },
   computed: mapState(['settings']),
 }
 </script>

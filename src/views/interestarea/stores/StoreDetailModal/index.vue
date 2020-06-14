@@ -10,7 +10,7 @@
       </a-descriptions-item>
       <!-- 2nd row -->
       <a-descriptions-item label="상호명" :span="2">
-        {{ storeInfo.shopName }}
+        <strong>{{ storeInfo.shopName }}</strong>
       </a-descriptions-item>
       <a-descriptions-item label="지점명">
         {{ storeInfo.localName }}
@@ -45,10 +45,21 @@
         {{ storeInfo.lng }}
       </a-descriptions-item>
     </a-descriptions>
+    <div style="padding: 10px">
+      <naver-maps
+      :height="height"
+      :width="width"
+      :mapOptions="mapOptions"
+      :initLayers="initLayers"
+      @load="onLoad">
+      <naver-marker :lat="37" :lng="127" @load="onMarkerLoaded"/>
+    </naver-maps>
+    </div>
   </a-modal>
 </template>
 <script>
 import http from '@/util/http-common.js'
+// import naver from 'vue-naver-maps'
 
 export default {
   name: 'storeDetailModal',
@@ -63,22 +74,19 @@ export default {
       colSize: 3,
       storeInfo: {},
       // map data
-      // width: 600,
-      // height: 600,
-      // info: false,
-      // marker: null,
-      // count: 1,
-      // map: null,
-      // isCTT: false,
-      // mapOptions: {
-      //   lat: 0,
-      //   lng: 0,
-      //   zoom: 10,
-      //   zoomControl: true,
-      //   zoomControlOptions: { position: 'TOP_RIGHT' },
-      //   mapTypeControl: true,
-      // },
-      // initLayers: ['BACKGROUND', 'BACKGROUND_DETAIL', 'POI_KOREAN', 'TRANSIT', 'ENGLISH', 'CHINESE', 'JAPANESE'],
+      width: 730,
+      height: 400,
+      info: false,
+      marker: null,
+      map: null,
+      mapOptions: {
+        lat: 37,
+        lng: 127,
+        zoom: 15,
+        zoomControl: false,
+        mapTypeControl: true,
+      },
+      initLayers: ['BACKGROUND', 'BACKGROUND_DETAIL', 'POI_KOREAN', 'TRANSIT'],
     }
   },
   created() {
@@ -95,6 +103,10 @@ export default {
           this.$emit('closeModalEvent')
         }
       },
+    },
+    // map
+    hello() {
+      return 'Hello, World!'
     },
   },
   watch: {
@@ -120,15 +132,44 @@ export default {
             oldAddress: data.jibunaddress,
             newPostCode: data.postcode,
             oldPostCode: data.oldpostcode,
-            lat: data.lat.replace(/"/g, ''),
-            lng: data.lng.replace(/"/g, ''),
+            lat: parseFloat(data.lat.replace(/"/g, '')),
+            lng: parseFloat(data.lng.replace(/"/g, '')),
           }
+          this.updateMapStatus()
         })
         .catch((data) => {
           console.log(data)
-          alert('Opps!! 상점 상세 정보 조회 과정에 문제가 생겼습니다.')
+          this.$notification.error({
+            message: '불러오기 실패',
+            description:
+              '상점 상세 정보를 불러오는 도중에 문제가 발생하였습니다.',
+          })
+          this.$emit('closeModalEvent')
         })
+    },
+    // map
+    onLoad(vue) {
+      console.log('onLoad!!')
+      console.log(this.mapOptions)
+      this.map = vue
+    },
+    onWindowLoad(that) {
+      console.log('onWindowLoad !!')
+    },
+    onMarkerLoaded(vue) {
+      this.marker = vue.marker
+      this.marker.setDraggable(false)
+    },
+    updateMapStatus() {
+      // this.map.setOptions({ lat: this.storeInfo.lat, lng: this.storeInfo.lng })
+      this.map.setCenter(this.storeInfo.lat, this.storeInfo.lng)
+      this.marker.setPosition(this.storeInfo.lat, this.storeInfo.lng)
+      this.map.setZoom(16, true)
+      this.map.setZoom(17, true)
     },
   },
 }
 </script>
+
+<style scoped>
+</style>
