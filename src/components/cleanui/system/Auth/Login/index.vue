@@ -1,20 +1,20 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-unused-vars */
+/* eslint-disable handle-callback-err */
 <template>
   <div>
     <div class="text-center mb-5">
       <h1 class="mb-5">
         <strong>Welcome to {{ settings.logo }}</strong>
       </h1>
-      <p>
-        Credentials for testing purposes -
-        <strong>demo@sellpixels.com</strong> /
-        <strong>demo123</strong>
-      </p>
+
     </div>
     <div class="card" :class="$style.container">
       <div class="text-dark font-size-24 mb-3">
         <strong>로그인</strong>
       </div>
       <div class="mb-4">
+        <!--
         <a-radio-group
           :value="settings.authProvider"
           @change="e => changeAuthProvider(e.target.value)"
@@ -22,13 +22,14 @@
           <a-radio value="firebase">Firebase</a-radio>
           <a-radio value="jwt">JWT</a-radio>
         </a-radio-group>
+        -->
       </div>
       <a-form class="mb-4" :form="form" @submit="handleSubmit">
         <a-form-item>
           <a-input
             size="large"
             placeholder="Email"
-            v-decorator="['email', { initialValue: 'demo@sellpixels.com', rules: [{ required: true, message: '아이디를 입력해주세요!' }]}]"
+            v-decorator="['email', { initialValue: 'ssafy', rules: [{ required: true, message: '아이디를 입력해주세요!' }]}]"
           />
         </a-form-item>
         <a-form-item>
@@ -36,7 +37,7 @@
             size="large"
             placeholder="Password"
             type="password"
-            v-decorator="['password', {initialValue: 'demo123', rules: [{ required: true, message: '비밀번호를 입력해주세요!' }]}]"
+            v-decorator="['password', {initialValue: 'ssafy', rules: [{ required: true, message: '비밀번호를 입력해주세요!' }]}]"
           />
         </a-form-item>
         <a-button
@@ -52,6 +53,7 @@
         <a @click.prevent="loginWithKakao()">
           <img src="https://developers.kakao.com/tool/resource/static/img/button/login/full/ko/kakao_login_medium_wide.png" width="416px" height="53px">
         </a>
+        <br>
       <router-link to="/auth/forgot-password" class="kit__utils__link font-size-16">비밀번호 찾기</router-link>
     </div>
     <div class="text-center pt-2 mb-auto">
@@ -62,14 +64,17 @@
 </template>
 <script>
 
-import { mapState } from 'vuex'
+// eslint-disable-next-line no-unused-vars
+import Vuex, * as vuex from 'vuex'
+import http from '@/util/http-common.js'
+import Vue from 'vue'
 
 export default {
   name: 'CuiLogin',
   components: {
   },
   computed: {
-    ...mapState(['settings']),
+    ...vuex.mapState(['settings']),
     loading() {
       return this.$store.state.user.loading
     },
@@ -92,6 +97,7 @@ export default {
       console.log('failure')
       console.log(data)
     },
+
     loginWithKakao() {
       if (!window.Kakao.Auth.getAccessToken()) { // 사용자 토근이 만료된 경우 (로그아웃된 경우)
         window.Kakao.Auth.loginForm({
@@ -118,10 +124,23 @@ export default {
     },
     handleSubmit(e) {
       e.preventDefault()
+      // eslint-disable-next-line handle-callback-err
       this.form.validateFields((err, values) => {
-        if (!err) {
-          this.$store.dispatch('user/LOGIN', { payload: values })
-        }
+        http
+          .post('/users/login', {
+            uid: values.email,
+            upassword: values.password,
+          })
+          .then(({ data }) => {
+            if (data.length !== 0) {
+              this.$store.dispatch('user/LOGIN_v2', { payload: data })
+            } else {
+              Vue.prototype.$notification.error({
+                mmessage: '잘못된 비밀번호입니다.',
+                description: '로그인에 실패하였습니다.',
+              })
+            }
+          })
       })
     },
   },

@@ -1,6 +1,8 @@
+/* eslint-disable handle-callback-err */
 import Vue from 'vue'
 import Vuex from 'vuex'
 import router from '@/router'
+import http from '@/util/http-common.js'
 
 import * as firebase from '@/services/firebase'
 import * as jwt from '@/services/jwt'
@@ -8,7 +10,6 @@ import * as kakao from '@/services/kakao'
 
 const mapAuthProviders = {
   // 밑에 firebase랑 jwt는 나중에 뺄 예정
-  // 우리 DB 회원 테이블이랑 연동하는거 추가해야함
   firebase: {
     login: firebase.login,
     register: firebase.register,
@@ -42,6 +43,8 @@ export default {
     avatar: '', // 필요없음
     authorized: process.env.VUE_APP_AUTHENTICATED || false, // false is default value
     loading: false,
+    address: '',
+    phone: '',
   },
   mutations: {
     SET_STATE(state, payload) {
@@ -58,6 +61,25 @@ export default {
           message: `${rootState.user.name}님 반갑습니다.`,
           description: '정상적으로 로그인 처리되었습니다.',
         })
+      })
+    },
+
+    // 로그인 성공 후 db 저장된 사용자 정보로 갱신
+    LOGIN_v2({ commit, dispatch, rootState }, { payload }) {
+      const { id, email, name, avatar, address, phone, role } = { id: payload.uid, email: payload.uid.concat('@happyhouse.com'), address: payload.uaddress, phone: payload.uphone, name: payload.uname, role: 'normal_user' }
+      commit('SET_STATE', {
+        id,
+        name,
+        email,
+        avatar,
+        address,
+        phone,
+        role,
+        authorized: true,
+      })
+      Vue.prototype.$notification.success({
+        message: `${rootState.user.name}님 반갑습니다.`,
+        description: '정상적으로 로그인 처리되었습니다.',
       })
     },
 
@@ -85,32 +107,77 @@ export default {
       })
     },
     REGISTER({ commit, dispatch, rootState }, { payload }) {
-      const { email, password, name } = payload
-      commit('SET_STATE', {
-        loading: true,
-      })
+      http
+        .post('/users/join', {
+          uid: payload.id,
+          upassword: payload.password,
+          uphone: payload.phone.replace(/-/gi, ''),
+          uaddress: payload.address,
+          uname: payload.name,
+        })
+        .then(({ data }) => {
+          console.log(data)
+          if (data === 'success') {
+            Vue.prototype.$notification.success({
+              message: 'Succesful Registered',
+              description: 'You have successfully registered!',
+            })
+          } else {
+            Vue.prototype.$notification.error({
+              message: 'Register Failure',
+              description: '같은 id 의 사용자가 존재합니다.',
+            })
+          }
+        })
+        .catch((error) => {
+          Vue.prototype.$notification.error({
+            message: 'Register Failure',
+            description: '등록 중 문제가 발생하였습니다.',
+          })
+        })
+      router.push('/auth/login')
+    },
+    UPDATE({ commit, dispatch, rootState }, { payload }) {
+      const { id, email, name, avatar, address, phone, role } = { id: payload.id, email: payload.id.concat('@happyhouse.com'), address: payload.address, phone: payload.phone, name: payload.name, role: 'normal_user' }
 
-      const register = mapAuthProviders[rootState.settings.authProvider].register
-      register(email, password, name).then(success => {
-        if (success) {
-          dispatch('LOAD_CURRENT_ACCOUNT')
-          Vue.prototype.$notification.success({
-            message: 'Succesful Registered',
-            description: 'You have successfully registered!',
-          })
-        }
-        if (!success) {
-          commit('SET_STATE', {
-            loading: false,
-          })
-        }
-      })
+      http
+        .put('/users/update', {
+          uid: id,
+          upassword: payload.password,
+          uname: name,
+          uphone: phone,
+          uaddress: address,
+        })
+        .then(({ data }) => {
+          if (data === 'success') {
+            commit('SET_STATE', {
+              id,
+              name,
+              email,
+              avatar,
+              address,
+              phone,
+              role,
+              authorized: true,
+            })
+            Vue.prototype.$notification.success({
+              mmessage: '수정 완료',
+              description: '정보 수정이 완료되었습니다.',
+            })
+          } else {
+            Vue.prototype.$notification.error({
+              mmessage: '잘못된 비밀번호입니다.',
+              description: '잘못된 비밀번호입니다.',
+            })
+          }
+        })
     },
     LOAD_CURRENT_ACCOUNT({ commit, rootState }) {
       return new Promise((resolve, reject) => {
         commit('SET_STATE', {
           loading: true,
         })
+
         const currentAccount = mapAuthProviders[rootState.settings.authProvider].currentAccount
         currentAccount().then(response => {
           if (response) {
@@ -142,6 +209,8 @@ export default {
           avatar: '',
           authorized: false,
           loading: false,
+          address: '',
+          phone: '',
         })
         router.push('/auth/login')
       })
