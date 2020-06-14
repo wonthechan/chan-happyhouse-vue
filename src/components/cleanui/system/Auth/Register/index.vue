@@ -5,24 +5,15 @@
         <strong>Create your account</strong>
       </div>
       <div class="mb-4">
-        <p>
-          And start spending more time on your projects and less time managing your
-          infrastructure.
-        </p>
+
       </div>
       <a-form class="mb-4" :form="form" @submit="handleSubmit">
+
         <a-form-item>
           <a-input
             size="large"
-            placeholder="Full Name"
-            v-decorator="['name', {rules: [{ required: true, message: 'Please input your full name' }]}]"
-          />
-        </a-form-item>
-        <a-form-item>
-          <a-input
-            size="large"
-            placeholder="Email Address"
-            v-decorator="['email', {rules: [{ required: true, message: 'Please input your email address' }]}]"
+            placeholder="Id"
+            v-decorator="['id', {rules: [{ required: true, message: 'Please input your id' }]}]"
           />
         </a-form-item>
         <a-form-item>
@@ -33,6 +24,31 @@
             v-decorator="['password', {rules: [{ required: true, message: 'Please input your password' }]}]"
           />
         </a-form-item>
+
+ <a-form-item>
+          <a-input
+            size="large"
+            placeholder="Full Name"
+            v-decorator="['name', {rules: [{ required: true, message: 'Please input your full name' }]}]"
+          />
+        </a-form-item>
+
+         <a-form-item>
+          <a-input
+            size="large"
+            placeholder="Address"
+            v-decorator="['address', {rules: [{ required: true, message: 'Please input your address' }]}]"
+          />
+        </a-form-item>
+
+         <a-form-item>
+          <a-input
+            size="large"
+            placeholder="Phone Number"
+            v-decorator="['phone', {rules: [{ required: true, message: 'Please input your phone number' }]}]"
+          />
+        </a-form-item>
+
         <a-button
           type="primary"
           size="large"

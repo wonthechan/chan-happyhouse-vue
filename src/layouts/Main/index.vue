@@ -65,6 +65,7 @@
 
 <script>
 import { mapState } from 'vuex'
+
 import CuiTopbar from '@/components/cleanui/layout/Topbar'
 // import CuiBreadcrumbs from '@/components/cleanui/layout/Breadcrumbs'
 import CuiFooter from '@/components/cleanui/layout/Footer'

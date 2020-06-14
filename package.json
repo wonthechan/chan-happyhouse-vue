@@ -6,7 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "build-demo": "VUE_APP_AUTHENTICATED=true vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint --fix"
   },
   "dependencies": {
     "ant-design-vue": "^1.5.4",
@@ -32,6 +32,7 @@
     "vue-custom-scrollbar": "^1.1.0",
     "vue-draggable-nested-tree": "^3.0.0-beta2",
     "vue-echarts": "^4.0.3",
+    "vue-horizontal-list": "^1.0.7",
     "vue-i18n": "^8.17.4",
     "vue-moment": "^4.1.0",
     "vue-naver-maps": "^0.12.1",
@@ -57,7 +58,7 @@
     "eslint-plugin-node": "^11.0.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
-    "eslint-plugin-vue": "^6.2.2",
+    "eslint-plugin-vue": "^7.0.0-alpha.6",
     "less": "^3.11.1",
     "less-loader": "^5.0.0",
     "lint-staged": "^10.2.0",
