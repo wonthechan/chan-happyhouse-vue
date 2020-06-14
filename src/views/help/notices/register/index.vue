@@ -22,7 +22,7 @@
           <div class="form-group">
             <div class="form-group">
               <a-form-item label="글 내용">
-                <div class="height-400 mb-3">
+                <div class="mb-3" style="height: 430px;">
                   <quill-editor style="height: 350px;" v-model="noticeContent"></quill-editor>
                 </div>
               </a-form-item>

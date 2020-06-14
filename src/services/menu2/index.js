@@ -6,7 +6,7 @@ export const getMenuData = [
   {
     title: '아파트 / 주택',
     key: 'apps',
-    icon: 'fe fe-database',
+    icon: 'environment',
     children: [
       {
         title: '검색',
@@ -23,7 +23,7 @@ export const getMenuData = [
   {
     title: '분양 정보',
     key: 'extraApps',
-    icon: 'fe fe-hard-drive',
+    icon: 'calendar',
     children: [
       {
         title: '분양 일정',
@@ -35,7 +35,7 @@ export const getMenuData = [
   {
     title: '고객지원',
     key: 'help',
-    icon: 'fe fe-shopping-cart',
+    icon: 'question-circle',
     children: [
       {
         title: '공지사항',
@@ -52,7 +52,7 @@ export const getMenuData = [
   {
     title: '관심 지역',
     key: 'interestarea',
-    icon: 'fe fe-user',
+    icon: 'pushpin',
     children: [
       {
         title: '관심 지역 관리',
