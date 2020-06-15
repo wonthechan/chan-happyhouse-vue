@@ -157,7 +157,7 @@ const router = new Router({
           meta: {
             title: 'Apps / GitHub Explore',
           },
-          component: () => import('./views/apps/github-explore'),
+          component: () => import('./views/auth/under-construction'),
         },
         {
           path: '/apps/google-analytics',
@@ -446,6 +446,43 @@ const router = new Router({
                 title: '공지사항 상세',
               },
               component: () => import('./views/help/notices/detail'),
+            },
+          ],
+        },
+        {
+          path: '/help/qnas',
+          meta: {
+            title: 'QnA 게시판',
+          },
+          component: () => import('./views/help/qnas'),
+          children: [
+            {
+              path: '/help/qnas/list',
+              meta: {
+                title: 'QnA 목록',
+              },
+              component: () => import('./views/help/qnas/list'),
+            },
+            {
+              path: '/help/qnas/register',
+              meta: {
+                title: 'QnA 등록',
+              },
+              component: () => import('./views/help/qnas/register'),
+            },
+            {
+              path: '/help/qnas/update/:id',
+              meta: {
+                title: 'QnA 수정',
+              },
+              component: () => import('./views/help/qnas/update'),
+            },
+            {
+              path: '/help/qnas/detail/:id',
+              meta: {
+                title: 'QnA 상세',
+              },
+              component: () => import('./views/help/qnas/detail'),
             },
           ],
         },

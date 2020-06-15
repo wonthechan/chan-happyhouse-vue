@@ -1,8 +1,11 @@
 <template>
   <div :class="$style.topbar">
     <div class="mr-4">
-      <a-icon style="font-size: 25px;" class="mr-2" type="home" />
-      <span style="font-size: 25px;" class="font-weight-bold">Happy House</span>
+      <!-- 로고 클릭 시 메인 페이지로 이동 -->
+      <a href="/dashboard/alpha">
+        <a-icon style="font-size: 25px;" class="mr-2" type="home" />
+        <span style="font-size: 25px;" class="font-weight-bold">Happy House</span>
+      </a>
     </div>
     <div class="mr-auto">
       <cui-search v-if="false"/>

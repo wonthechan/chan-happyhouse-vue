@@ -33,23 +33,6 @@ export const getMenuData = [
     ],
   },
   {
-    title: '고객지원',
-    key: 'help',
-    icon: 'question-circle',
-    children: [
-      {
-        title: '공지사항',
-        key: 'helpNotices',
-        url: '/help/notices',
-      },
-      {
-        title: 'QnA',
-        key: 'helpQnA',
-        url: '/ecommerce/orders',
-      },
-    ],
-  },
-  {
     title: '관심 지역',
     key: 'interestarea',
     icon: 'pushpin',
@@ -68,6 +51,23 @@ export const getMenuData = [
         title: '주변 기타 정보',
         key: 'interestareaEtc',
         url: '/interestarea/etc',
+      },
+    ],
+  },
+  {
+    title: '고객지원',
+    key: 'help',
+    icon: 'question-circle',
+    children: [
+      {
+        title: '공지사항',
+        key: 'helpNotices',
+        url: '/help/notices',
+      },
+      {
+        title: 'QnA',
+        key: 'helpQnA',
+        url: '/help/qnas',
       },
     ],
   },

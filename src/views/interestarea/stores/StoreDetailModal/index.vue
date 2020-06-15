@@ -55,6 +55,7 @@
       <naver-marker :lat="37" :lng="127" @load="onMarkerLoaded"/>
     </naver-maps>
     </div>
+    <div style="padding-left: 10px">Naver Map API</div>
   </a-modal>
 </template>
 <script>
@@ -112,7 +113,6 @@ export default {
   watch: {
     storeNo: function(newVal, oldVal) { // prop 속성 watch 하기, 그리고 정보 업데이트
       if (newVal === -1) return
-      console.log('Prop changed: ', newVal, ' | was: ', oldVal)
       this.updateDetail(newVal)
     },
   },
@@ -129,7 +129,7 @@ export default {
             mediumCategory: data.codename2,
             smallCategory: data.codename3,
             newAddress: data.address,
-            oldAddress: data.jibunaddress,
+            oldAddress: data.jibuaddress,
             newPostCode: data.postcode,
             oldPostCode: data.oldpostcode,
             lat: parseFloat(data.lat.replace(/"/g, '')),
