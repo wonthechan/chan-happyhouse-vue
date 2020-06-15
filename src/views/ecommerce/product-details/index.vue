@@ -1,10 +1,10 @@
 <template>
+<div>
   <div>
     <div class="cui__utils__heading">
-      <strong>Ecommerce: Product Details</strong>
+      <strong> <a @click="insertInterestHouse(apt.no)" slot="extra"><a-icon style="color:orange;" type="star" /></a></strong>
     </div>
     <div class="card overflow-hidden">
-      <div :class="$style.new">New</div>
       <div class="card-body">
         <div class="row">
           <div class="col-lg-4">
@@ -15,67 +15,49 @@
             >
               <i class="fe fe-heart font-size-21"></i>
             </a>
-            <div :class="$style.image" class="height-250 mb-3">
-              <img :src="images[activeImgIndex]" alt="Product" />
-            </div>
+ <google-map class="googleMap" @click="addMarker">
+      <div slot-scope="{ google, map }">
+        <google-map-marker
+          v-for="(marker, index) in markers"
+          :google="google"
+          :map="map"
+          :key="index"
+          :position="marker.position"
+          @click="panTo($event, map)"
+        >
+        </google-map-marker>
+        <google-map-custom-control
+          :google="google"
+          :map="map"
+          position="BOTTOM_CENTER">
+          <input type="text">
+        </google-map-custom-control>
+      </div>
+    </google-map>
             <div class="d-flex flex-wrap mb-3">
-              <a
-                v-for="(image, index) in images"
-                :key="index"
-                href="#"
-                v-on:click="setImage(index)"
-                :class="[index === activeImgIndex ? 'border-primary' : '', $style.thumb]"
-                class="width-100 height-100 border mr-2 mb-2"
-              >
-                <img :src="image" alt="Product" />
-              </a>
             </div>
           </div>
           <div class="col-lg-8">
-            <div class="font-size-24 font-weight-bold text-dark mb-2">
-              $199.28
-              <del class="align-text-top font-size-14">$299.28</del>
+            <div class="font-weight-light text-dark mb-2">
+              <h1>{{apt.aptName}}</h1>
+              <div><h1 class="align-text-bottom text-blue font-weight-light">{{apt.dealAmount}}만 원<br/>{{apt.area}}m² ({{Math.floor(apt.area/3)}}평)</h1></div>
             </div>
-            <div class="pb-3 mb-4 border-bottom">
-              <a href="javascript:void(0);" class="text-blue font-size-18">
-                TP-Link AC1750 Smart WiFi Router - Dual
-                <br />Band Gigabit Wireless Internet Routers for
-                <br />Home
-              </a>
+            <div class="pb-3 mb-4 mt-6 border-bottom">
+              <a href="javascript:void(0);" class="font-size-15">
+                <br />
+                서울시 종로구 {{apt.dong}}
+                <br />{{apt.jibun}}번지&nbsp;{{apt.floor}}층
+                <br />건축년도 : {{apt.buildYear}}
+                <br />거래일 : {{apt.dealYear}}.{{apt.dealMonth}}.{{apt.dealDay}}
+                </a>
             </div>
-            <div class="mb-4 width-300">
-              <a-select defaultValue="Red" style="width: 100%">
-                <a-select-option value="red">Red</a-select-option>
-                <a-select-option value="black">Black</a-select-option>
-                <a-select-option value="cyan">Cyan</a-select-option>
-                <a-select-option value="blue">Blue</a-select-option>
-              </a-select>
-            </div>
-            <a
-              href="javascript: void(0);"
-              class="width-200 btn btn-success btn-with-addon mr-auto mb-3 text-nowrap d-none d-md-block"
-            >
-              <span class="btn-addon">
-                <i class="btn-addon-icon fe fe-plus-circle"></i>
-              </span>
-              Add To Card
-            </a>
-            <a-tabs defaultActiveKey="1" class="kit-tabs-bordered">
-              <a-tab-pane tab="Information" key="1" />
-              <a-tab-pane tab="Description" key="2" />
+            <a-tabs defaultActiveKey="1">
+              <a-tab-pane tab="더 많은 사진 보기" key="1" />
+              <a-tab-pane tab="상세 설명" key="2" />
             </a-tabs>
             <div class="card-body px-0">
               <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                Ipsum has been the industry&apos;s standard dummy text ever since the 1500s,
-                when an unknown printer took a galley of type and scrambled it to make a type
-                specimen book. It has survived not only five centuries, but also the leap into
-                electronic typesetting, remaining essentially unchanged.
-              </p>
-              <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
-                Ipsum has been the industry&apos;s standard dummy text ever since the 1500s,
-                when an unknown printer took a galley of type.
+                <a @click="search">사진 검색하기</a>
               </p>
             </div>
           </div>
@@ -83,29 +65,34 @@
       </div>
     </div>
     <div class="cui__utils__heading">
-      <h5>Related Products</h5>
+      <h5>Related Apartments</h5>
     </div>
     <div class="row">
       <div class="col-lg-4" v-for="(product, index) in data.products" :key="index">
         <cui-general-16
-          :isNew="product.isNew"
-          :isFavorite="product.isFavorite"
-          :image="product.image"
-          :name="product.name"
-          :price="product.price"
-          :oldPrice="product.oldPrice"
+          :isFavorite="true"
+          :name="apt.aptName"
+          :price="apt.dealAmount"
         />
       </div>
     </div>
   </div>
+  </div>
 </template>
 <script>
+import http from '@/util/http-common.js'
 import data from './data.json'
 import CuiGeneral16 from '@/components/kit/widgets/General/16/index'
 
 export default {
+  name: 'detail',
   components: {
     CuiGeneral16,
+  },
+  props: {
+    apt: { type: Array },
+    aptlist: { type: Object },
+    threeapt: { type: Object },
   },
   data: function () {
     return {
@@ -123,6 +110,16 @@ export default {
     setImage: function (index) {
       event.preventDefault()
       this.activeImgIndex = index
+    },
+    search() {
+      event.preventDefault()
+      window.open('https://www.google.com/search?q='.concat(this.apt.aptName).concat('+아파트+사진&tbm=isch'), '_blank')
+    },
+    insertInterestHouse(no) {
+      http.post('/houses/interest/insert', { uid: this.uid, no: no })
+        .then(({ data }) => {
+          this.$message.success('즐겨찾기에 등록되었습니다.')
+        })
     },
   },
 }

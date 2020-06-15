@@ -101,7 +101,7 @@ export default {
       // setter
       set(newValue) {
         if (newValue === false) {
-          this.$emit('closeModalEvent')
+          this.$emit('close-modal-event')
         }
       },
     },
@@ -144,7 +144,7 @@ export default {
             description:
               '상점 상세 정보를 불러오는 도중에 문제가 발생하였습니다.',
           })
-          this.$emit('closeModalEvent')
+          this.$emit('close-modal-event')
         })
     },
     // map

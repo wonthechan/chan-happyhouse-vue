@@ -14,7 +14,7 @@ export const getMenuData = [
         url: '/apps/profile',
       },
       {
-        title: '매매 조회',
+        title: '즐겨찾기',
         key: 'appsCalendar',
         url: '/apps/calendar',
       },

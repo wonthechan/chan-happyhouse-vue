@@ -84,7 +84,7 @@
     </div>
     <!-- Modal -->
     <store-detail-modal
-      @closeModalEvent="closeDetailModal()"
+      @close-modal-event="closeDetailModal()"
       :isVisible="visible"
       :storeNo="detailStoreNo"
     />
