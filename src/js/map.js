@@ -5,6 +5,13 @@ export default (key) => {
     render (h) {
       const el = 'div'
       const options = { ref: 'map' }
+      if (this.google && this.map && Object.keys(this.$scopedSlots).length) {
+        const scopedSlot = this.$scopedSlots.default({
+          google: this.google,
+          map: this.map,
+        })
+        return h(el, options, [scopedSlot])
+      }
       return h(el, options)
     },
     data () {
@@ -25,10 +32,14 @@ export default (key) => {
         const el = this.$refs.map
         const map = new this.google.maps.Map(el, {
           center: {
-            lat: 37,
-            lng: 127,
+            lat: 37.5793355,
+            lng: 126.9684839,
           },
-          zoom: 14,
+          zoom: 18,
+        })
+
+        map.addListener('click', (e) => {
+          this.$emit('click', e)
         })
 
         this.map = map

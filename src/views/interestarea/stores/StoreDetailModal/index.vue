@@ -101,6 +101,7 @@ export default {
       // setter
       set(newValue) {
         if (newValue === false) {
+          // eslint-disable-next-line vue/custom-event-name-casing
           this.$emit('closeModalEvent')
         }
       },
@@ -144,6 +145,7 @@ export default {
             description:
               '상점 상세 정보를 불러오는 도중에 문제가 발생하였습니다.',
           })
+          // eslint-disable-next-line vue/custom-event-name-casing
           this.$emit('closeModalEvent')
         })
     },

@@ -1,39 +1,41 @@
 /* eslint-disable no-tabs */
 <template>
   <div>
-
+    <div v-if="goDetail">
+    <detail
+      :apt="apt"
+      :aptList="aptlist"
+      :threeapt="threeapt"
+    />
+    </div>
+    <div v-else>
     <div class="row ">
       <div class="col-lg-12" style="margin-bottom:50px;margin-top:50px;" >
-
             <div class="form-inline" >
               <table class="table table-borderless">
                 <tr>
                   <td align="center">
-                  <a-select style="width: 150px" class="form-control" v-model="searchField">
-                    <a-select-option  value="0">선택</a-select-option >
+                  <a-select :value="searchField" style="width: 150px" class="form-control" v-model="searchField">
+                    <a-select-option  value="선택">선택</a-select-option >
                     <a-select-option  value="aptName">아파트 이름</a-select-option >
                     <a-select-option  value="dong">동 이름</a-select-option >
                   </a-select>
                     <a-input style="width: 400px" v-model="searchText"></a-input>
-                    <a-button type="primary" id="registerArea" @click="aptList(); info(); initPageNo(); initOrder();">찾기</a-button>
+                    <a-button type="primary" id="registerArea" @click="aptList(); info(); initPageNo(); initOrder(); mapList();">찾기</a-button>
                   </td>
                 </tr>
-
-<div class = "container">
-        <b-tabs v-if="TOTAL_LIST_ITEM_COUNT!==0">
-          <!-- 탭 기능  (카드 or 맵)-->
-          <b-tab title="Card" active>
-     <!-- 정렬 -->
+    <!-- 정렬 -->
       <tr>
-        <td align="right">
-      <a-select style="width: 150px; margin-right:250px; align=right;" class="form-control" v-model="order" @change="aptList(); initPageNo();">
+        <td align="right" v-if="TOTAL_LIST_ITEM_COUNT!==0">
+      <a-select style="width: 150px; margin-right:150px;" class="form-control" v-model="order" @change="aptList(); initPageNo();">
        <a-select-option  value="">가격별 정렬</a-select-option >
         <a-select-option  value="asc">오름차순</a-select-option >
         <a-select-option  value="desc">내림차순</a-select-option >
        </a-select>
        </td>
-      </tr>
+      </tr><br />
        <!-- 정렬 end -->
+<div class = "container">
         <!-- aptlist start-->
             <div class="row e-card-layout">
         <div class="col-sm-4 col-sm-4 col-sm-4 col-sm-4" style="margin-bottom:50px" v-for="(item, index) in aptlist" v-bind:key="index">
@@ -41,17 +43,18 @@
            <div class = "container">
          <a-card style="width: 300px">
            <a @click="insertInterestHouse(item.no)" slot="extra"><a-icon style="color:orange;" type="star" /></a>
-              <img @click="aptView(item.no)" v-b-modal.modal-1 class="btn btn-light"
+              <img @click="aptView(item.no)" class="btn btn-light"
                 alt="example"
-                src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+                src="@/img/apt/건양하늘터.jpg"
+                style="height: 300px"
                 slot="cover"
-              />
+              /><!--https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png -->
               <a-card-meta :description="item.aptName" style="font-size:30px;">
               </a-card-meta>
               <a-card-meta :description="item.dealAmount" style="font-size:20px;">
               </a-card-meta>
               <br>
-               <p> {{item.dong}}  면적 : {{item.area}}  건축 연도 : {{item.buildYear}}</p>
+               <h6> {{item.dong}}</h6> <h6>{{Math.floor(item.area)}}m² ({{Math.floor(item.area/3)}}평)  {{item.buildYear}}년 건축</h6>
 
             </a-card>
         </div>
@@ -81,16 +84,6 @@
                 </ul>
               </div>
         <!---------------------->
-
-          </b-tab>
-
-          <!-- 맵 -->
-          <b-tab title="Map">
-            <br>
-              <google-map class="googleMap"></google-map>
-          </b-tab>
-
-        </b-tabs>
       </div>
               </table>
 
@@ -101,46 +94,28 @@
 
         </div>
 
-<!-- 아파트 상세정보 모달 -->
-  <b-modal id="modal-1"
-      :title=apt.aptName
-      :header-bg-variant="headerBgVariant"
-      :header-text-variant="headerTextVariant"
-      hide-footer="true"
-       centered>
-
-         <img src="img/apt/건양하늘터.jpg" class="rounded" width = "300" style="float:left; margin:10px;"/>
-         <div class="mb-5">
-              {{apt.dong}}
     </div>
-    <div>{{apt.dealAmount}}</div>
-    <div>{{apt.buildYear}}</div>
-    <div>
-      {{apt.dealYear}}년{{apt.dealMonth}}월{{apt.dealDay}}일
-    </div>
-    <div>전용 면적 : {{apt.area}}</div>
-    <div>{{apt.floor}}층</div>
-
-      </b-modal>
-<!---------------->
-
       </div>
 </template>
 <script>
 
 import http from '@/util/http-common.js'
+import Detail from '@/views/ecommerce/product-details'
 export default {
   name: 'houseSearch',
   components: {
+    Detail,
   },
   data() {
     return {
       uid: this.$store.state.user.email.substring(0, this.$store.state.user.email.indexOf('@')),
       order: '',
-      searchField: '',
+      searchField: '선택',
       searchText: '',
+      url: '@/img/apt/건양하늘터.jpg',
       aptlist: [],
       apt: {},
+      threeapt: [],
       aptdescription: '',
       LIST_ROW_COUNT: 12,
       OFFSET: 0,
@@ -152,27 +127,28 @@ export default {
       startPageIndex: 0,
       endPageIndex: 0,
       prev: false,
-      locations: [{
-        lat: '37.5793355',
-        lng: '126.9684839',
-      }],
+      goDetail: false,
     }
   },
+  created() {
+    this.goDetail = false
+  },
   methods: {
-
     // 검색 결과 정보를 9개씩 불러온다.
     aptList() {
-      http.post('/houses/search', { order: this.order, pageNo: this.CURRENT_PAGE_INDEX - 1, searchField: this.searchField, searchText: this.searchText })
-        .then(({ data }) => {
-          this.aptlist = data
-          this.aptListTotalCnt()
-        })
+      if (this.searchField === '선택') { this.$message.info('검색 타입을 선택해주세요') } else {
+        http.post('/houses/search', { order: this.order, pageNo: this.CURRENT_PAGE_INDEX - 1, searchField: this.searchField, searchText: this.searchText })
+          .then(({ data }) => {
+            this.aptlist = data
+            this.aptListTotalCnt()
+          })
+      }
     },
     // 검색 결과 개수 알림
     info() {
       setTimeout(() => {
-        if (this.TOTAL_LIST_ITEM_COUNT === 0) { this.$message.info('검색 결과가 없습니다.') } else { this.$message.info(`총 ${this.TOTAL_LIST_ITEM_COUNT}건의 결과가 있습니다.`) }
-      }, 900)
+        if (this.TOTAL_LIST_ITEM_COUNT === 0 && this.searchField !== '선택') { this.$message.info('검색 결과가 없습니다.') } else if (this.searchField === '선택') {} else { this.$message.info(`총 ${this.TOTAL_LIST_ITEM_COUNT}건의 결과가 있습니다.`) }
+      }, 1000)
     },
     // 리스트를 뷰에 뿌린 뒤, 페이징을 하기 위하여 전체 아파트 개수를 구한다.
     aptListTotalCnt() {
@@ -185,10 +161,14 @@ export default {
 
     // 아파트 번호에 해당하는 정보를 모달에 띄워 보여준다
     aptView(no) {
+      for (var i = 0; i < 3; i++) {
+        this.threeapt.push(this.aptlist[Math.floor(Math.random() * this.TOTAL_LIST_ITEM_COUNT)])
+      }
       http.get(`/houses/detail/${no}`)
         .then(({ data }) => {
           this.apt = data
         })
+      this.goDetail = true
     },
     // 유저 아파트 즐겨찾기 추가
     insertInterestHouse(no) {
@@ -201,11 +181,8 @@ export default {
     mapList() {
       http.post('/houses/map', { searchField: this.searchField, searchText: this.searchText })
         .then(({ data }) => {
-          this.locations = data
         })
-      alert(this.locations[0].lat)
     },
-
     // 페이징
     addPagination() {
       this.pageCount = Math.ceil(this.TOTAL_LIST_ITEM_COUNT / this.LIST_ROW_COUNT)

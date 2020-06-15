@@ -4,9 +4,9 @@
       <div class="col-lg-3">
         <a-page-header
           style="border: 1px solid rgb(235, 237, 240)"
-          title="즐겨찾기 한 매물"
+          title="즐겨찾기"
           :breadcrumb="{ props: { routes } }"
-          sub-title="즐겨찾기 한 매물을 관리할 수 있습니다."
+          sub-title="즐겨찾기한 아파트/주택 정보를 관리할 수 있습니다."
         />
       </div>
       <div class="col-lg-9">
@@ -26,7 +26,8 @@
            <a @click="deleteInterestHouse(item.no)" slot="extra"><a-icon style="color:red;" type="close-circle" /></a>
               <img @click="aptView(item.no)" v-b-modal.modal-1 class="btn btn-light"
                 alt="example"
-                src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+                src="@/img/apt/건양하늘터.jpg"
+                style="height: 300px"
                 slot="cover"
               />
               <a-card-meta :description="item.aptName" style="font-size:30px;">
@@ -34,7 +35,7 @@
               <a-card-meta :description="item.dealAmount" style="font-size:20px;">
               </a-card-meta>
               <br>
-               <p> {{item.dong}}  면적 : {{item.area}}  건축 연도 : {{item.buildYear}}</p>
+               <h6> {{item.dong}}</h6> <h6>{{Math.floor(item.area)}}m² ({{Math.floor(item.area/3)}}평)  {{item.buildYear}}년 건축</h6>
             </a-card>
         </div>
           </div>
@@ -47,6 +48,24 @@
       <div class="col-lg-6">
       </div>
     </div>
+    <!-- 아파트 상세정보 모달 -->
+  <b-modal id="modal-1"
+      :title=apt.aptName
+      :header-bg-variant="headerBgVariant"
+      :header-text-variant="headerTextVariant"
+      hide-footer="true"
+       centered>
+    <div>
+   <!-- <img src="@/img/apt/건양하늘터.jpg" style="width:30%;display:inline; float: left;" />-->
+    <h6>서울시 종로구 {{apt.aptdong}}</h6>
+    <h6>{{apt.dealAmount}} 만원</h6>
+    <h6>{{Math.floor(apt.area)}} ({{Math.floor(apt.area/3)}}평)</h6>
+    <h6>{{apt.buildYear}}</h6>
+    <h6>{{apt.dealYear}}년{{apt.dealMonth}}월{{apt.dealDay}}일</h6>
+    <h6>{{apt.floor}}층</h6>
+    </div>
+      </b-modal>
+<!---------------->
   </div>
 </template>
 <script>
@@ -59,6 +78,8 @@ export default {
     return {
       uid: this.$store.state.user.email.substring(0, this.$store.state.user.email.indexOf('@')),
       aptlist: [],
+      apt: {},
+      url: '',
       routes: [
         {
           path: '',
@@ -82,14 +103,23 @@ export default {
     deleteInterestHouse(no) {
       http.delete(`/houses/interest/delete/${this.uid}/${no}`)
         .then(({ data }) => {
-          if (data === 'success') { this.$message.success('즐겨찾기에서 삭제되었습니다.') } else { this.$message.success('삭제에 실패하였습니다.') }
+          if (data === 'success') {
+            this.findAllInterestHouse()
+            this.$message.success('즐겨찾기에서 삭제되었습니다.')
+          } else { this.$message.success('삭제에 실패하였습니다.') }
         })
-      this.findAllInterestHouse()
     },
     findAllInterestHouse() {
       http.get(`/houses/interest/${this.uid}`)
         .then(({ data }) => {
           this.aptlist = data
+        })
+    }, // 아파트 번호에 해당하는 정보를 모달에 띄워 보여준다
+    aptView(no) {
+      http.get(`/houses/detail/${no}`)
+        .then(({ data }) => {
+          this.url = '@/img/apt/'.concat(data.aptName)
+          this.apt = data
         })
     },
 
