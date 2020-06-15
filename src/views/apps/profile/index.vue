@@ -9,12 +9,12 @@
               <table class="table table-borderless">
                 <tr>
                   <td align="center">
-                  <a-select style="width: 150px" class="form-control" v-model="searchField">
-                    <a-select-option  value="0">선택</a-select-option >
-                    <a-select-option  value="aptName">아파트 이름</a-select-option >
-                    <a-select-option  value="dong">동 이름</a-select-option >
-                  </a-select>
-                    <a-input style="width: 400px" v-model="searchText"></a-input>
+                    <a-select style="width: 150px" class="form-control mr-3" v-model="searchField">
+                      <a-select-option  value="0">선택</a-select-option >
+                      <a-select-option  value="aptName">아파트 이름</a-select-option >
+                      <a-select-option  value="dong">동 이름</a-select-option >
+                    </a-select>
+                    <a-input class="mr-3" style="width: 400px" v-model="searchText"></a-input>
                     <a-button type="primary" id="registerArea" @click="aptList(); info(); initPageNo(); initOrder();">찾기</a-button>
                   </td>
                 </tr>
