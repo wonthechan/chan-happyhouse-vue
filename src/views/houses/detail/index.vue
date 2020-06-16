@@ -10,7 +10,7 @@
           <div class="col-lg-4">
             <a
               @click="insertInterestHouse(apt.no)"
-              v-on:click="toggleFavorite"
+              v-on:click="toggleFavorite" :isFavorite="true"
               :class="[$style.favorite, favorite ? 'text-dark' : 'text-gray-3']"
             >
               <i class="fe fe-heart font-size-21"></i>
@@ -40,7 +40,7 @@
           <img width="145" height="150" style="margin-right:20px;" src="@/img/apt/무악동현대.jpg" />
           <img width="145" height="150" style="margin-right:20px;" src="@/img/apt/현대뜨레비앙.jpg" />
           <img width="145" height="150" style="margin-right:20px;" src="@/img/apt/평창동갑을.jpg" />
-          <img width="145" height="150" style="margin-right:20px;" src="@/img/apt/창신동두산.jpg"/>
+          <img width="145" height="150" style="margin-right:20px;" src="@/img/apt/평동경희궁자이(3단지).jpg"/>
           <a @click="search()" style="float:right;margin-top:45px;font-size:30px;">-></a>
           </a-tab-pane>
       </a-tabs>

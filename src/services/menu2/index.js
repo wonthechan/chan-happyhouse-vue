@@ -10,13 +10,13 @@ export const getMenuData = [
     children: [
       {
         title: '검색',
-        key: 'appsProfile',
-        url: '/apps/profile',
+        key: 'housesSearch',
+        url: '/houses/search',
       },
       {
         title: '즐겨찾기',
-        key: 'appsCalendar',
-        url: '/apps/calendar',
+        key: 'housesInterest',
+        url: '/houses/interest',
       },
     ],
   },
@@ -27,8 +27,8 @@ export const getMenuData = [
     children: [
       {
         title: '분양 일정',
-        key: 'extraAppsGithubExplore',
-        url: '/apps/github-explore',
+        key: 'bunyang',
+        url: '/bunyang',
       },
     ],
   },

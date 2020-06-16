@@ -35,7 +35,7 @@ export default (key) => {
             lat: 37.5793355,
             lng: 126.9684839,
           },
-          zoom: 18,
+          zoom: 12,
         })
 
         map.addListener('click', (e) => {

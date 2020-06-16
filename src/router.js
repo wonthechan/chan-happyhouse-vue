@@ -389,6 +389,29 @@ const router = new Router({
           },
           component: () => import('./views/advanced/colors'),
         },
+        // 아파트
+        {
+          path: '/houses/search',
+          meta: {
+            title: '아파트 검색',
+          },
+          component: () => import('./views/houses/search'),
+        },
+        {
+          path: '/houses/interest',
+          meta: {
+            title: '아파트 즐겨찾기',
+          },
+          component: () => import('./views/houses/interestHouse'),
+        },
+        // 분양 정보
+        {
+          path: '/bunyang',
+          meta: {
+            title: '분양 정보',
+          },
+          component: () => import('./views/bunyang'),
+        },
         // 관심 지역
         {
           path: '/interestarea/manage',

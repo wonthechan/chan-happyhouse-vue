@@ -16,16 +16,23 @@
               <table class="table table-borderless">
                 <tr>
                   <td align="center">
-                  <a-select :value="searchField" style="width: 150px" class="form-control" v-model="searchField">
-                    <a-select-option  value="선택">선택</a-select-option >
-                    <a-select-option  value="aptName">아파트 이름</a-select-option >
-                    <a-select-option  value="dong">동 이름</a-select-option >
+
+                    <!-- 선택옵션 -->
+                  <a-select class="form-control" :value="searchField" style="width: 150px; height:70px;font-size:15px;" v-model="searchField">
+                    <a-select-option  style="width: 150px; height:80px;font-size:50px;" value="선택">선택</a-select-option >
+                    <a-select-option  style="width: 150px; height:80px;font-size:50px;" value="aptName">아파트 이름</a-select-option >
+                    <a-select-option  style="width: 150px; height:80px;font-size:50px;" value="dong">동 이름</a-select-option >
                   </a-select>
-                    <a-input style="width: 400px" v-model="searchText"></a-input>
-                    <a-button type="primary" id="registerArea" @click="aptList(); msg(); initPageNo(); initOrder(); mapList();">찾기</a-button>
+                    <!-- 입력창 -->
+                    <a-input style="width: 700px;height:70px;font-size:15px;padding-left:16px;" enter-button="Search" v-model="searchText"
+                    ></a-input>
+                    <!-- 버튼 클릭 -->
+                    <a-button style="height:70px;" type="primary" id="registerArea" @click="aptList(); msg(); initPageNo(); initOrder(); mapList();">
+                      찾기
+                      </a-button>
                   </td>
                 </tr>
-
+<br /><br /><br />
 <div class = "container">
 
    <b-tabs v-if="TOTAL_LIST_ITEM_COUNT!==0">
