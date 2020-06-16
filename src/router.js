@@ -18,7 +18,7 @@ const router = new Router({
       redirect: 'dashboard/alpha',
       component: MainLayout,
       meta: {
-        authRequired: true,
+        authRequired: false,
         hidden: true,
       },
       children: [

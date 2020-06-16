@@ -55,7 +55,7 @@ export const getMenuData = [
     ],
   },
   {
-    title: '고객지원',
+    title: '고객 지원',
     key: 'help',
     icon: 'question-circle',
     children: [
