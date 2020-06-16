@@ -36,7 +36,7 @@ Vue.use(BootstrapVue)
 Vue.use(VueLayers)
 Vue.use(NProgress)
 Vue.use(VuePageTitle, {
-  prefix: 'Clean UI Pro Vue | ',
+  prefix: 'Happy House | ',
   router,
 })
 Vue.use(vueGoogleMapWrapper, { apiKey: 'AIzaSyB6FYzXV_4wBKef7_bhyZVBHZGvNUV4U9Y' })

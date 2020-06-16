@@ -8,13 +8,14 @@
     </div>
     <div class="card-body">
       <div class="mb-1">
-        <div align="right"><span st yle="font-size: 11px; font-weight: bold;">국토교통부 실거래가 공개시스템 API 활용</span></div>
+        <div class="text-muted" style="font-size: 11px; font-weight: bold;" align="right">국토교통부 실거래가 공개시스템 API 활용</div>
         <vue-chartist v-if="animationData.series.length > 0"
           class="chartist-animated height-300"
           type="Line"
           :data="animationData"
           :options="animatonOptions"
         />
+        <div class="text-muted" style="font-size: 11px;" align="left">(만원/연월)</div>
       </div>
       <div>
         <div align="center">

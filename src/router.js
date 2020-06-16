@@ -26,7 +26,7 @@ const router = new Router({
         {
           path: '/dashboard/alpha',
           meta: {
-            title: 'Dashboard Alpha',
+            title: '메인',
           },
           component: () => import('./views/dashboard/alpha'),
         },
@@ -413,33 +413,19 @@ const router = new Router({
           component: () => import('./views/bunyang'),
         },
         // 관심 지역
-        {
-          path: '/interestarea/manage',
+        { // (통합)
+          path: '/interest/manage',
           meta: {
-            title: '관심 지역 관리',
+            title: '관심 정보 관리',
           },
-          component: () => import('./views/interestarea/manage'),
+          component: () => import('./views/interest/manage'),
         },
         {
-          path: '/interestarea/stores',
+          path: '/interest/stores',
           meta: {
             title: '주변 상권',
           },
-          component: () => import('./views/interestarea/stores'),
-        },
-        {
-          path: '/interestarea/etc',
-          meta: {
-            title: '주변 기타 정보',
-          },
-          component: () => import('./views/auth/under-construction'),
-        },
-        { // TEST
-          path: '/interest/manage',
-          meta: {
-            title: '관심 통합 관리',
-          },
-          component: () => import('./views/interest/manage'),
+          component: () => import('./views/interest/stores'),
         },
         // 고객 지원
         {
@@ -542,21 +528,21 @@ const router = new Router({
         {
           path: '/auth/login',
           meta: {
-            title: 'Sign In',
+            title: '로그인',
           },
           component: () => import('./views/auth/login'),
         },
         {
           path: '/auth/register',
           meta: {
-            title: 'Sign Up',
+            title: '회원 가입',
           },
           component: () => import('./views/auth/register'),
         },
         {
           path: '/auth/forgot-password',
           meta: {
-            title: 'Forgot Password',
+            title: '비밀번호 찾기',
           },
           component: () => import('./views/auth/forgot-password'),
         },
@@ -570,7 +556,7 @@ const router = new Router({
         {
           path: '/auth/under-construction',
           meta: {
-            title: 'UnderConstruction',
+            title: '제작중인 페이지',
           },
           component: () => import('./views/auth/under-construction'),
         },
@@ -584,8 +570,12 @@ const router = new Router({
   ],
 })
 
+// 모든 라우터이동에 대해 권한이 필요한 페이지에 접근하는 경우 로그인되어 있지 않으면 로그인 페이지로 리다이렉트
 router.beforeEach((to, from, next) => {
+  console.log(from)
+  console.log(to)
   if (to.matched.some(record => record.meta.authRequired)) {
+    console.log(store.state.user.authorized)
     if (!store.state.user.authorized) {
       next({
         path: '/auth/login',

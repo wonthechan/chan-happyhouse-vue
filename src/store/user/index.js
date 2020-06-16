@@ -172,10 +172,11 @@ export default {
           }
         })
     },
+    // 현재 사용자의 계정 정보 불러와서 store의 state에 저장
     LOAD_CURRENT_ACCOUNT({ commit, rootState }) {
       return new Promise((resolve, reject) => {
         commit('SET_STATE', {
-          loading: true,
+          loading: true, // 현재 사용자의 계정 정보를 불러오는 동안 로딩화면이 지속
         })
 
         const currentAccount = mapAuthProviders[rootState.settings.authProvider].currentAccount
