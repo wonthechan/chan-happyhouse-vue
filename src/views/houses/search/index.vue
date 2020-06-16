@@ -18,12 +18,12 @@
                   <td align="center">
                     <div>
                     <!-- 선택옵션 -->
-                  <a-select size="large" class="font-weight-bold list-unstyled" :value="searchField" style="width: 150px;font-size:20px;color:#96939c;" v-model="searchField">
+                  <a-select size="large" class="font-weight-bold list-unstyled mr-3" :value="searchField" style="width: 150px;font-size:20px;color:#96939c;" v-model="searchField">
                     <a-select-option  value="aptName">아파트 이름</a-select-option >
                     <a-select-option   value="dong">동 이름</a-select-option >
                   </a-select>
                     <!-- 입력창 -->
-                    <a-input placeholder="원하시는 지역명, 아파트명을 입력해주세요" class="font-weight-bold list-unstyled" style="width: 700px;height:70px;font-size:20px;padding-left:16px;" enter-button="Search" v-model="searchText">
+                    <a-input placeholder="원하시는 지역명, 아파트명을 입력해주세요" class="font-weight-bold list-unstyled mr-3" style="width: 700px;height:70px;font-size:20px;padding-left:16px;" enter-button="Search" v-model="searchText">
 
                     </a-input>
                     <!-- 버튼 클릭 -->
@@ -57,7 +57,7 @@
          <a-card style="width: 300px">
            <a @click="insertInterestHouse(item.no)" slot="extra"><a-icon style="color:orange;" type="star" /></a>
               <img @click="aptView(item.no); recentlyVisited(item.no)" class="btn btn-light"
-                :src="require(`@/img/apt/${item.img}`)"
+                :src="`../../img/apt/${item.img}`"
                 style="height: 300px"
                 slot="cover"
               />

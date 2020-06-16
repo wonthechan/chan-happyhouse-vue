@@ -2,7 +2,7 @@
   <div :class="$style.topbar">
     <div class="mr-4">
       <!-- 로고 클릭 시 메인 페이지로 이동 -->
-      <a href="/dashboard/alpha">
+      <a href="/main">
         <a-icon style="font-size: 25px;" class="mr-2" type="home" />
         <span style="font-size: 25px;" class="font-weight-bold">Happy House</span>
       </a>

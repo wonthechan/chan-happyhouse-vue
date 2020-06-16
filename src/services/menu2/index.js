@@ -13,11 +13,6 @@ export const getMenuData = [
         key: 'housesSearch',
         url: '/houses/search',
       },
-      {
-        title: '즐겨찾기',
-        key: 'housesInterest',
-        url: '/houses/interest',
-      },
     ],
   },
   {
