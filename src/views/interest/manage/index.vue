@@ -11,7 +11,7 @@
       </div>
       <div class="col-lg-9">
         <!-- 카드 들어갈 자리 (탭스위치 적용)-->
-        <a-tabs default-active-key="1" @change="callback">
+        <a-tabs default-active-key="1" @change="callback()" tab-position="right">
           <a-tab-pane key="1" tab="관심 지역">
             <!-- 관심 지역 관리 카드를 컴포넌트화 -->
             <interest-area-manage />
@@ -57,6 +57,9 @@ export default {
   computed: {
   },
   methods: {
+    callback() {
+      console.log('switched!')
+    },
   },
 }
 </script>
