@@ -8,21 +8,24 @@
     </div>
     <div class="card-body">
       <div class="mb-1">
+        <div align="right"><span st yle="font-size: 11px; font-weight: bold;">국토교통부 실거래가 공개시스템 API 활용</span></div>
         <vue-chartist v-if="animationData.series.length > 0"
-          class="chartist-animated height-300 mt-4"
+          class="chartist-animated height-300"
           type="Line"
           :data="animationData"
           :options="animatonOptions"
         />
       </div>
-      <div align="center">
-        <a-select style="width: 120px" @change="handleChange()" placeholder="자치구 선택" v-model="selectedJachigu" disabled>
-          <template v-for="(item, index) in guNames">
-            <a-select-option :value="index" :key="'item_' + index">
-              {{ item }}
-            </a-select-option>
-          </template>
-        </a-select>
+      <div>
+        <div align="center">
+          <a-select style="width: 120px" @change="handleChange()" placeholder="자치구 선택" v-model="selectedJachigu">
+            <template v-for="(item, index) in guNames">
+              <a-select-option :value="index" :key="'item_' + index">
+                {{ item }}
+              </a-select-option>
+            </template>
+          </a-select>
+        </div>
       </div>
     </div>
   </div>
@@ -41,7 +44,7 @@ export default {
   data() {
     return {
       avgDealData: [],
-      selectedJachigu: 0, // 초기 선택값
+      selectedJachigu: 0, // 초기 선택값 (강남구)
       animationData: {
         labels: ['`19.06', '`19.07', '`19.08', '`19.09', '`19.10', '`19.11', '`19.12', '`20.01', '`20.02', '`20.03', '`20.04', '`20.05'],
         series: [
@@ -72,22 +75,18 @@ export default {
         data.map((item) => {
           this.avgDealData.push(item.avgDealPrice)
         })
+        this.handleChange()
       })
-    // 강남구 데이터를 기본 데이터로 설정
-    console.log(this.avgDealData[0])
-    this.selectedJachigu = 0
-    this.handleChange()
   },
   methods: {
     handleChange() {
       console.log('handleChange() is called!')
-
-      console.log(this.avgDealData)
-      // this.animationData.series = []
-      // for (var i = 12 * this.selectedJachigu; i < 12 * this.selectedJachigu + 12; i++) {
-      //   this.animationData.series.push(this.avgDealData[i])
-      // }
-      // console.log(this.animationData.series)
+      var temp = []
+      this.animationData.series = []
+      for (var i = 12 * this.selectedJachigu; i < 12 * this.selectedJachigu + 12; i++) {
+        temp.push(this.avgDealData[i])
+      }
+      this.animationData.series.push(temp)
     },
   },
 }
