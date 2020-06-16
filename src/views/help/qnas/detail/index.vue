@@ -23,10 +23,10 @@
     <div class="mb-4">
       <a-button class="mr-3" icon="left" @click="moveToListPage()">목록으로 돌아가기</a-button>
       <!-- 작성자인 경우에만 수정/삭제 버튼 활성화 -->
-      <tempalte v-if="$store.state.user.id === qnaWriter">
+      <template v-if="$store.state.user.id === qnaWriter">
         <a-button class="mr-3" icon="edit" @click="moveToUpdatePage()">수정하기</a-button>
         <a-button type="danger" icon="delete" @click="showDeleteConfirm()">삭제하기</a-button>
-      </tempalte>
+      </template>
     </div>
     <!-- 코멘트 리스트 커스텀 컴포넌트 삽입 (게시글 id 값을 props으로 넘겨준다) -->
     <comment-list @update-comment-event="updateComments()" :boardNo="$route.params.id" :key="componentKey"/>

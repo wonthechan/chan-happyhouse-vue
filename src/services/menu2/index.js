@@ -3,6 +3,35 @@ export const getMenuData = [
     category: true,
     title: 'Apps & Pages',
   },
+  // {
+  //   title: '아파트 / 주택',
+  //   key: 'apps',
+  //   icon: 'environment',
+  //   children: [
+  //     {
+  //       title: '검색',
+  //       key: 'appsProfile',
+  //       url: '/apps/profile',
+  //     },
+  //     {
+  //       title: '즐겨찾기',
+  //       key: 'appsCalendar',
+  //       url: '/apps/calendar',
+  //     },
+  //   ],
+  // },
+  // {
+  //   title: '분양 정보',
+  //   key: 'extraApps',
+  //   icon: 'calendar',
+  //   children: [
+  //     {
+  //       title: '분양 일정',
+  //       key: 'extraAppsGithubExplore',
+  //       url: '/apps/github-explore',
+  //     },
+  //   ],
+  // },
   {
     title: '아파트 / 주택',
     key: 'apps',
@@ -10,13 +39,13 @@ export const getMenuData = [
     children: [
       {
         title: '검색',
-        key: 'appsProfile',
-        url: '/apps/profile',
+        key: 'housesSearch',
+        url: '/houses/search',
       },
       {
         title: '즐겨찾기',
-        key: 'appsCalendar',
-        url: '/apps/calendar',
+        key: 'housesInterest',
+        url: '/houses/interest',
       },
     ],
   },
@@ -27,8 +56,8 @@ export const getMenuData = [
     children: [
       {
         title: '분양 일정',
-        key: 'extraAppsGithubExplore',
-        url: '/apps/github-explore',
+        key: 'bunyang',
+        url: '/bunyang',
       },
     ],
   },
