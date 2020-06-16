@@ -434,6 +434,13 @@ const router = new Router({
           },
           component: () => import('./views/auth/under-construction'),
         },
+        { // TEST
+          path: '/interest/manage',
+          meta: {
+            title: '관심 통합 관리',
+          },
+          component: () => import('./views/interest/manage'),
+        },
         // 고객 지원
         {
           path: '/help/notices',

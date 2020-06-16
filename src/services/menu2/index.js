@@ -3,6 +3,35 @@ export const getMenuData = [
     category: true,
     title: 'Apps & Pages',
   },
+  // {
+  //   title: '아파트 / 주택',
+  //   key: 'apps',
+  //   icon: 'environment',
+  //   children: [
+  //     {
+  //       title: '검색',
+  //       key: 'appsProfile',
+  //       url: '/apps/profile',
+  //     },
+  //     {
+  //       title: '즐겨찾기',
+  //       key: 'appsCalendar',
+  //       url: '/apps/calendar',
+  //     },
+  //   ],
+  // },
+  // {
+  //   title: '분양 정보',
+  //   key: 'extraApps',
+  //   icon: 'calendar',
+  //   children: [
+  //     {
+  //       title: '분양 일정',
+  //       key: 'extraAppsGithubExplore',
+  //       url: '/apps/github-explore',
+  //     },
+  //   ],
+  // },
   {
     title: '아파트 / 주택',
     key: 'apps',
@@ -52,10 +81,15 @@ export const getMenuData = [
         key: 'interestareaEtc',
         url: '/interestarea/etc',
       },
+      { // TEST
+        title: '관심 통합',
+        key: 'interestManage',
+        url: '/interest/manage',
+      },
     ],
   },
   {
-    title: '고객지원',
+    title: '고객 지원',
     key: 'help',
     icon: 'question-circle',
     children: [
