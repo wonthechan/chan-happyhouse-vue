@@ -81,6 +81,11 @@ export const getMenuData = [
         key: 'interestareaEtc',
         url: '/interestarea/etc',
       },
+      { // TEST
+        title: '관심 통합',
+        key: 'interestManage',
+        url: '/interest/manage',
+      },
     ],
   },
   {
