@@ -2,14 +2,13 @@
   <div class="card">
     <div class="card-header card-header-flex">
       <div class="d-flex flex-column justify-content-center mr-auto">
-        <!-- <h5 class="mb-0">공지사항</h5> -->
       </div>
       <div class="d-flex flex-column justify-content-center">
         <a-button type="primary" icon="form" @click.prevent="moveToRegisterPage()">새 QnA 작성</a-button>
       </div>
     </div>
     <div class="card-body">
-      <a-table :columns="columns" :dataSource="notices">
+      <a-table :columns="columns" :dataSource="qnas">
         <!-- 검색 필터 툴팁 설정 -->
         <div
           slot="filterDropdown"
@@ -130,21 +129,21 @@ const columns = [
   },
 ]
 export default {
-  name: 'noticeList',
+  name: 'qnaList',
   data() {
     return {
       searchText: '',
       searchInput: null,
-      notices: [],
+      qnas: [],
       columns,
     }
   },
   created() {
     // 공지사항 가져오기 (DB)
-    http.get('/vue/api/notices')
+    http.get('/vue/api/qnas')
       .then(({ data }) => {
         data.map((item) => {
-          this.notices.push({
+          this.qnas.push({
             key: item.no,
             writer: item.uid,
             noticeTitle: item.title,
@@ -163,11 +162,11 @@ export default {
       this.searchText = ''
     },
     moveToRegisterPage() {
-      this.$router.push('/help/notices/register')
+      this.$router.push('/help/qnas/register')
     },
     moveToDetailPage(key) {
       console.log(key)
-      this.$router.push(`/help/notices/detail/${key}`)
+      this.$router.push(`/help/qnas/detail/${key}`)
     },
   },
 }

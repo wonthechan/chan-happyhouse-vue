@@ -12,6 +12,8 @@
       'cui__layout__borderless': settings.isBorderless,
     }"
     >
+      <a-back-top />
+
       <!-- left menu -->
       <cui-menu-left v-if="settings.menuLayoutType === 'left' && !settings.isMobileView" />
 
@@ -33,7 +35,6 @@
 
       <!-- top menu -->
       <cui-menu-top v-if="settings.menuLayoutType === 'top' && !settings.isMobileView"/>
-
       <a-layout>
         <a-layout-header
           :class="{
@@ -44,7 +45,7 @@
         >
           <cui-topbar />
         </a-layout-header>
-        <!-- <cui-breadcrumbs /> -->
+          <my-carousel />
         <a-layout-content style="height: '100%';  position: 'relative'">
           <div class="cui__utils__content">
             <transition :name="settings.routerAnimation" mode="out-in">
@@ -67,10 +68,11 @@ import CuiTopbar from '@/components/cleanui/layout/Topbar'
 import CuiFooter from '@/components/cleanui/layout/Footer'
 import CuiMenuLeft from '@/components/cleanui/layout/Menu/MenuLeft'
 import CuiMenuTop from '@/components/cleanui/layout/Menu/MenuTop'
+import MyCarousel from '@/components/custom/MyCarousel'
 
 export default {
   name: 'MainLayout',
-  components: { CuiFooter, CuiTopbar, CuiMenuLeft, CuiMenuTop },
+  components: { CuiFooter, CuiTopbar, CuiMenuLeft, CuiMenuTop, MyCarousel },
   computed: mapState(['settings']),
   data: function () {
     return {

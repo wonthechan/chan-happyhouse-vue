@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex flex-nowrap align-items-start pt-4">
     <div class="mr-4 flex-shrink-0 align-self-start kit__utils__avatar kit__utils__avatar--size64">
-      <img src="resources/images/avatars/3.jpg" alt="Mary Stanform" />
+      <img src="@/img/img_avatar2.png" alt="avatar2" />
     </div>
     <div class="flex-grow-1">
       <div class="border-bottom">
@@ -37,20 +37,12 @@
           Lorem ipsum dolor sit amit,consectetur eiusmdd tempory
           <br />incididunt ut labore et dolore magna elit
         </div>
-        <div class="d-flex flex-wrap justify-content-start align-items-start mb-3">
-          <a class="text-blue mr-3" href="javascript: void(0);">
-            <i class="fe fe-heart mr-1" /> 61 Likes
-          </a>
-          <a class="text-blue mr-3" href="javascript: void(0);">
-            <i class="fe fe-message-square mr-1" /> 2 Comments
-          </a>
-        </div>
       </div>
       <div class="d-flex flex-nowrap align-items-start pt-4">
         <div
           class="mr-4 flex-shrink-0 align-self-start kit__utils__avatar kit__utils__avatar--size64"
         >
-          <img src="resources/images/avatars/3.jpg" alt="Mary Stanform" />
+          <img src="@/img/img_avatar2.png" alt="Mary Stanform" />
         </div>
         <div class="flex-grow-1">
           <div class="border-bottom">

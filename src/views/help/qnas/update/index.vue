@@ -2,7 +2,7 @@
   <div class="card">
     <div class="card-header card-header-flex">
       <div class="d-flex flex-column justify-content-center mr-auto">
-        <h5 class="mb-0">공지사항 수정</h5>
+        <h5 class="mb-0">QnA 수정</h5>
       </div>
       <div class="d-flex flex-column justify-content-center">
         <a-button icon="left" @click="moveToListPage()">목록으로 돌아가기</a-button>
@@ -14,7 +14,7 @@
             <div class="row">
               <div class="col-lg-6">
                 <a-form-item label="글 제목">
-                  <a-input v-decorator="['noticeTitle', { rules: [{ required: true, message: '제목을 입력해주세요' }] }]" placeholder=""/>
+                  <a-input v-decorator="['qnaTitle', { rules: [{ required: true, message: '제목을 입력해주세요' }] }]" placeholder=""/>
                 </a-form-item>
               </div>
             </div>
@@ -23,7 +23,7 @@
             <div class="form-group">
               <a-form-item label="글 내용">
                 <div class="mb-3" style="height: 430px;">
-                  <quill-editor style="height: 350px;" v-model="noticeContent"></quill-editor>
+                  <quill-editor style="height: 350px;" v-model="qnaContent"></quill-editor>
                 </div>
               </a-form-item>
             </div>
@@ -52,23 +52,23 @@ export default {
   data() {
     return {
       form: this.$form.createForm(this),
-      noticeId: -1,
-      noticeTitle: '',
-      noticeWriter: '',
-      noticeContent: '',
-      noticeDate: '',
+      qnaId: -1,
+      qnaTitle: '',
+      qnaWriter: '',
+      qnaContent: '',
+      qnaDate: '',
     }
   },
   created() {
     // 특정 공지사항 가져오기 (DB)
-    http.get(`/vue/api/notices/${this.$route.params.id}`)
+    http.get(`/vue/api/qnas/${this.$route.params.id}`)
       .then(({ data }) => {
-        this.noticeId = data.no
-        this.noticeTitle = data.title
-        this.noticeWriter = data.uid
-        this.noticeContent = data.content
-        this.noticeDate = data.regdt
-        this.form.setFieldsValue({ noticeTitle: this.noticeTitle })
+        this.qnaId = data.no
+        this.qnaTitle = data.title
+        this.qnaWriter = data.uid
+        this.qnaContent = data.content
+        this.qnaDate = data.regdt
+        this.form.setFieldsValue({ qnaTitle: this.qnaTitle })
       })
       .catch((data) => {
         this.$notification.error({
@@ -81,19 +81,19 @@ export default {
   },
   methods: {
     moveToListPage() {
-      this.$router.push('/help/notices/list')
+      this.$router.push('/help/qnas/list')
     },
     handleSubmit() {
       this.form.validateFields((err, values) => {
         if (!err) { // 정상적으로 입력이 된 경우
-          this.noticeTitle = values.noticeTitle
+          this.qnaTitle = values.qnaTitle
           this.updateNotice()
         }
       })
     },
     // 공지사항 등록하기
     updateNotice() {
-      http.put(`/vue/api/notices/${this.noticeId}`, { no: this.noticeId, uid: this.noticeWriter, title: this.noticeTitle, content: this.noticeContent })
+      http.put(`/vue/api/qnas/${this.qnaId}`, { no: this.qnaId, title: this.qnaTitle, content: this.qnaContent })
         .then(({ data }) => {
           console.log(data)
           if (data === 'success') {

@@ -93,7 +93,7 @@ export default {
     },
     // 공지사항 등록하기
     updateNotice() {
-      http.put(`/vue/api/notices/${this.noticeId}`, { no: this.noticeId, uid: this.noticeWriter, title: this.noticeTitle, content: this.noticeContent })
+      http.put(`/vue/api/notices/${this.noticeId}`, { no: this.noticeId, title: this.noticeTitle, content: this.noticeContent })
         .then(({ data }) => {
           console.log(data)
           if (data === 'success') {
