@@ -2,14 +2,13 @@
   <div>
     <div class="card">
       <div class="card-body">
-       <!-- 여기서부터는 최신 분양정보 5개 carousel 그려줌 -->
 
         <div class="d-flex flex-wrap mb-3 mt-2">
-          <div class="mr-5 flex-grow-1">
-            <h4>분양 일정</h4>
-          </div>
-          <div class="flex-grow-1">
-            <div class="text-uppercase text-dark font-weight-bold mb-3">분양상태</div>
+ <a-divider orientation="left" style="margin-bottom:30px;">
+    <ul class="font-weight-bold list-unstyled font-size-30 mb-5">
+          <li>분양 캘린더&nbsp;&nbsp;&nbsp;<i class="fa fa-calendar"></i></li>
+        </ul>
+    </a-divider>
             <div class="d-flex flex-wrap">
               <div :class="$style.event">
                 <div class="kit__utils__donut kit__utils__donut--danger" />오픈
@@ -28,21 +27,7 @@
               </div>
             </div>
           </div>
-        </div>
         <a-calendar>
-
-    <div class="col-lg-4">
-      <h2 class="badge-example">List / 21</h2>
-      <kit-list-21 />
-    </div>
-    <div class="col-lg-4">
-      <h2 class="badge-example">List / 21-1</h2>
-      <kit-list-21v1 />
-    </div>
-    <div class="col-lg-4">
-      <h2 class="badge-example">List / 22-2</h2>
-      <kit-list-21v2 />
-    </div>
 
           <!-- value는 day이고, 해당 일의 listData가 존재하면 listData의 아이템들을 받아 type과 content를 달력에 표시한다 -->
           <ul class="events" slot="dateCellRender" slot-scope="value">
@@ -61,15 +46,54 @@
             </li>
           </template>
         </a-calendar>
+
+ <!-- 여기서부터는 최신 분양정보 5개 carousel 그려줌 -->
+
+<a-divider orientation="left" style="margin-top:100px;margin-bottom:30px;">
+      <ul class="font-weight-bold list-unstyled font-size-30 mb-5">
+          <li>오늘 마감&nbsp;&nbsp;<i class="fa fa-exclamation-circle" aria-hidden="true" stlye="color:#FF0000;"></i></li>
+        </ul>
+    </a-divider>
+
+ <div class="row">
+
+    <div class="col-lg-4" v-for="(item, index) in recentlyBunyang" :key="'item_' + index">
+      <div class="card bg-primary text-white" style="height:600px;">
+    <div class="card-body">
+      <div class="pt-5 pb-5 pl-5 pr-5 text-center flex-grow-1">
+        <i class="fe fe-home font-size-80 mb-3 d-block"></i>
+        <div class="font-weight-bold font-size-36">{{item.bname}}</div>
+        <div class="font-weight-bold font-size-48 mb-3">
+          {{item.bdate}}
+        </div>
+        <ul class="list-unstyled font-size-30 mb-5">
+          <li>{{item.blocation}} {{item.btype}}</li>
+        </ul>
+        <a class="btn btn-white width-100 height-40" @click="searchBunyang(item.bname)">
+          <h4 style="color:black;">{{item.bstate}}</h4></a>
+      </div>
+    </div>
+  </div>
+    </div>
+
+  </div>
+
       <!-- 여기서부터는 분양 정보 전체 리스트 그려줌 !-->
-            <table class="table table-hover" style="margin-top:70px;">
+
+<a-divider orientation="left" style="margin-top:100px;margin-bottom:30px;">
+     <ul class="font-weight-bold list-unstyled font-size-30 mb-5">
+          <li>모든 분양 알아보기&nbsp;<i class="fa fa-search"></i></li>
+        </ul>
+    </a-divider>
+
+            <table class="table table-hover">
                 <thead>
                   <tr class='table-default' style="height:70px;">
                     <th></th><th>분양 단계</th><th></th><th></th><th>건물 유형</th><th></th><th></th><th>날짜</th><th></th><th></th><th>분양 지역</th><th></th><th>건물명</th><th></th>
                   </tr>
                 </thead>
                 <tbody id="areaTbody">
-                  <tr vertical-align:middle style="cursor:pointer; height:70px;" v-for="(item, index) in pageBunyang" :key="'item_' + index" @click="searchBunyang(item.bname)">
+                  <tr class="font-weight-bold list-unstyled font-size-15" vertical-align:middle style="cursor:pointer; height:70px;" v-for="(item, index) in pageBunyang" :key="'item_' + index" @click="searchBunyang(item.bname)">
                     <td></td>
                     <td>{{item.bstate}}</td>
                     <td></td><td></td
@@ -116,16 +140,8 @@
 // yarn add moment
 // import moment from 'moment'
 import http from '@/util/http-common.js'
-import KitList21 from '@/components/kit/widgets/Lists/21'
-import KitList21v1 from '@/components/kit/widgets/Lists/21v1'
-import KitList21v2 from '@/components/kit/widgets/Lists/21v2'
 
 export default {
-  components: {
-    KitList21,
-    KitList21v1,
-    KitList21v2,
-  },
   data() {
     return {
       allBunyang: [], // 전체 분양정보

@@ -16,20 +16,20 @@
               <table class="table table-borderless">
                 <tr>
                   <td align="center">
-
+                    <div>
                     <!-- 선택옵션 -->
-                  <a-select class="form-control" :value="searchField" style="width: 150px; height:70px;font-size:15px;" v-model="searchField">
-                    <a-select-option  style="width: 150px; height:80px;font-size:50px;" value="선택">선택</a-select-option >
-                    <a-select-option  style="width: 150px; height:80px;font-size:50px;" value="aptName">아파트 이름</a-select-option >
-                    <a-select-option  style="width: 150px; height:80px;font-size:50px;" value="dong">동 이름</a-select-option >
+                  <a-select size="large" class="font-weight-bold list-unstyled" :value="searchField" style="width: 150px;font-size:20px;color:#96939c;" v-model="searchField">
+                    <a-select-option  value="aptName">아파트 이름</a-select-option >
+                    <a-select-option   value="dong">동 이름</a-select-option >
                   </a-select>
                     <!-- 입력창 -->
-                    <a-input style="width: 700px;height:70px;font-size:15px;padding-left:16px;" enter-button="Search" v-model="searchText"
-                    ></a-input>
+                    <a-input placeholder="원하시는 지역명, 아파트명을 입력해주세요" class="font-weight-bold list-unstyled" style="width: 700px;height:70px;font-size:20px;padding-left:16px;" enter-button="Search" v-model="searchText">
+
+                    </a-input>
                     <!-- 버튼 클릭 -->
-                    <a-button style="height:70px;" type="primary" id="registerArea" @click="aptList(); msg(); initPageNo(); initOrder(); mapList();">
+                    <a-button class="font-weight-bold list-unstyled" style="height:70px; font-size:20px;" type="primary" id="registerArea" @click="aptList(); msg(); initPageNo(); initOrder(); mapList();">
                       찾기
-                      </a-button>
+                      </a-button></div>
                   </td>
                 </tr>
 <br /><br /><br />
@@ -53,14 +53,16 @@
             <div class="row e-card-layout">
         <div class="col-sm-4 col-sm-4 col-sm-4 col-sm-4" style="margin-bottom:50px" v-for="(item, index) in aptlist" v-bind:key="index">
 
-           <div class = "container">
+        <div class = "container">
          <a-card style="width: 300px">
            <a @click="insertInterestHouse(item.no)" slot="extra"><a-icon style="color:orange;" type="star" /></a>
-              <img @click="aptView(item.no)" class="btn btn-light"
-                src="@/img/apt/건양하늘터.jpg"
+              <img @click="aptView(item.no); recentlyVisited(item.no)" class="btn btn-light"
+                :src="require(`@/img/apt/${item.img}`)"
                 style="height: 300px"
                 slot="cover"
-              /><!--https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png -->
+              />
+
+              <!--https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png -->
               <a-card-meta :description="item.aptName" style="font-size:30px;">
               </a-card-meta>
               <a-card-meta :description="item.dealAmount" style="font-size:20px;">
@@ -195,7 +197,7 @@ export default {
             description: '다시 입력해 주세요.',
           })
         }
-      }, 800)
+      }, 1000)
     },
     // 리스트를 뷰에 뿌린 뒤, 페이징을 하기 위하여 전체 아파트 개수를 구한다.
     aptListTotalCnt() {
@@ -228,6 +230,12 @@ export default {
             message: '아파트 즐겨찾기 등록 성공.',
             description: '즐겨찾기에 정상적으로 등록되었습니다.',
           })
+        })
+    },
+    // 유저가 방문한 기록 추가
+    recentlyVisited(no) {
+      http.post(`/houses/visited/${this.uid}/${no}`)
+        .then(({ data }) => {
         })
     },
     // 맵에 좌표 찍어올 distinct 아파트 리스트 받아오기

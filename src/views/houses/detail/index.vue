@@ -30,18 +30,21 @@
                 <br />아파트 매매
                 <br />{{apt.dealYear}}년 {{apt.dealMonth}}월 {{apt.dealDay}}일 거래
                 <br />건축년도 : {{apt.buildYear}}
-                <br />서울시 종로구 {{apt.dong}} {{apt.jibun}}번지&nbsp;{{apt.floor}}층
+                <div class="font-size-18 font-weight-light" >
+                서울시 종로구 {{apt.dong}} {{apt.jibun}}번지&nbsp;{{apt.floor}}층</div>
                 </a>
             </div>
 
               <a-tabs defaultActiveKey="1">
-        <a-tab-pane tab="더 많은 사진 보기" key="1" forceRender>
-          <img width="145" height="150" style="margin-right:20px;" src="@/img/apt/경희궁의아침.jpg" />
-          <img width="145" height="150" style="margin-right:20px;" src="@/img/apt/무악동현대.jpg" />
-          <img width="145" height="150" style="margin-right:20px;" src="@/img/apt/현대뜨레비앙.jpg" />
-          <img width="145" height="150" style="margin-right:20px;" src="@/img/apt/평창동갑을.jpg" />
-          <img width="145" height="150" style="margin-right:20px;" src="@/img/apt/평동경희궁자이(3단지).jpg"/>
-          <a @click="search()" style="float:right;margin-top:45px;font-size:30px;">-></a>
+                 <a-tab-pane tab="상세 설명" key="1" forceRender></a-tab-pane>
+        <a-tab-pane tab="더 많은 사진 보기" key="2">
+          <img width="118" height="110" style="margin-right:20px;" src="@/img/apt/경희궁의아침.jpg" />
+          <img width="118" height="110" style="margin-right:20px;" src="@/img/apt/무악동현대.jpg" />
+          <img width="118" height="110" style="margin-right:20px;" src="@/img/apt/현대뜨레비앙.jpg" />
+          <img width="118" height="110" style="margin-right:20px;" src="@/img/apt/평창동갑을.jpg" />
+          <img width="118" height="110" style="margin-right:20px;" src="@/img/apt/평동경희궁자이(3단지).jpg"/>
+          <img width="118" height="110" style="margin-right:20px;" src="@/img/apt/숭인동롯데캐슬천지인.jpg"/>
+          <a @click="search()" style="float:right;margin-top:35px;font-size:30px;">→</a>
           </a-tab-pane>
       </a-tabs>
 
@@ -51,18 +54,14 @@
         </div>
       </div>
     </div>
+     <a-divider orientation="left" style="margin-bottom:30px;">
+    <ul class="font-weight-bold list-unstyled font-size-30 mb-5">
+        </ul>
+    </a-divider>
     <div class="cui__utils__heading">
-      <h5>Related Apartments</h5>
+      <h5>Recently viewed</h5>
     </div>
-    <div class="row">
-      <div class="col-lg-4" v-for="(product, index) in data.products" :key="index">
-        <cui-general-16
-          :isFavorite="true"
-          :name="apt.aptName"
-          :price="apt.dealAmount"
-        />
-      </div>
-    </div>
+    <recently-visited />
   </div>
   </div>
 </template>
@@ -70,12 +69,11 @@
 import Vue from 'vue'
 import http from '@/util/http-common.js'
 import data from './data.json'
-import CuiGeneral16 from '@/views/houses/detail/kit/index'
-
+import RecentlyVisited from '@/views/houses/recentlyVisited'
 export default {
   name: 'detail',
   components: {
-    CuiGeneral16,
+    RecentlyVisited,
   },
   props: {
     apt: { type: Array },
