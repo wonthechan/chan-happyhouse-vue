@@ -27,7 +27,7 @@
 
                     </a-input>
                     <!-- 버튼 클릭 -->
-                    <a-button class="font-weight-bold list-unstyled" style="height:70px; font-size:20px;" type="primary" id="registerArea" @click="aptList(); msg(); initPageNo(); initOrder(); mapList(); refreshMapComponent();">
+                    <a-button class="font-weight-bold list-unstyled" style="height:70px; font-size:20px;" type="primary" id="registerArea" @click="aptList(); msg(); initPageNo(); initOrder(); mapList();">
                       찾기
                       </a-button></div>
                   </td>
@@ -241,6 +241,7 @@ export default {
     },
     // 맵에 좌표 찍어올 distinct 아파트 리스트 받아오기
     mapList() {
+      this.refreshMapComponent()
       http.post('/houses/map', { searchField: this.searchField, searchText: this.searchText })
         .then(({ data }) => {
           this.maplist = data
