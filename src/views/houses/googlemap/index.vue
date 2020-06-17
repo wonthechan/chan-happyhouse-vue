@@ -8,7 +8,7 @@
           :map="map"
           :key="index"
           :position="marker.position"
-          @click="panTo($event, map)"
+          @click="panTo($event, map, google, marker)"
         >
         </google-map-marker>
         <google-map-custom-control
@@ -25,9 +25,9 @@
 <script>
 export default {
   name: 'googlemap',
-  props: {
-    maplist: { type: Object },
-  },
+  props: [
+    'maplist',
+  ],
   data () {
     return {
       markers: [],
@@ -54,11 +54,18 @@ export default {
       //   },
       // })
     },
-    panTo (e, map) {
+    panTo (e, map, google, marker) {
       map.panTo(e.latLng)
       // 원래 줌 수준에서 2 이상 확대하려는 경우 끊김,,
       // 그래서 마커를 클릭할 때마다 2만큼 확대되도록 함
       map.setZoom(map.getZoom() + 2)
+      console.log(google)
+      console.log(marker)
+      // info window
+      // var infowindow = new google.maps.InfoWindow({
+      //   content: 'Latitude: ' + '123' + '<br>Longitude: ' + '32',
+      // })
+      // infowindow.open(map, marker)
     },
   },
 }
