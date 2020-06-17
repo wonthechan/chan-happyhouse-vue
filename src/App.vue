@@ -22,12 +22,12 @@ export default {
     },
   },
   mounted() {
-    this.$store.dispatch('user/LOAD_CURRENT_ACCOUNT')
+    this.$store.dispatch('user/LOAD_CURRENT_ACCOUNT') // 현재 사용자의 계정 정보 불러와서 store의 state에 저장
     this.$store.commit('SET_PRIMARY_COLOR', { color: this.settings.primaryColor })
     this.$store.commit('SET_THEME', { theme: this.settings.theme })
   },
   watch: {
-    '$store.state.settings.theme'(theme) {
+    '$store.state.settings.theme'(theme) { // 필요 없음
       this.$store.commit('SET_THEME', { theme })
     },
     authorized(authorized) {
