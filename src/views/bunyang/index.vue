@@ -47,7 +47,7 @@
           </template>
         </a-calendar>
 
- <!-- 여기서부터는 최신 분양정보 5개 carousel 그려줌 -->
+ <!-- 여기서부터는 최신 분양정보 3개 carousel 그려줌 -->
 
 <a-divider orientation="left" style="margin-top:100px;margin-bottom:30px;">
       <ul class="font-weight-bold list-unstyled font-size-30 mb-5">

@@ -16,59 +16,116 @@
         <a variant="primary" v-b-modal.modal-5>마이 페이지</a>
         <b-modal id="modal-5"
           title="내 정보"
-          hide-footer="true"
+          hide-footer=true
+          hide-header=true
           centered>
-          <div class="mb-5">
-            <b-card bg-variant="light">
-              <a-form class="mb-4" :form="form">
-                <label> 아이디</label>
-                <a-form-item>
-                  <a-input
-                    size="large"
-                    readonly="true"
-                    :placeholder="id"
-                    v-decorator="['id', {rules: [{ required: true, message: 'Please input your full id' }]}]"
-                  />
-                </a-form-item>
-                <label> 이름</label>
-                <a-form-item>
-                  <a-input
-                    size="large"
-                    :placeholder="name"
-                    v-decorator="['name', {rules: [{ required: true, message: 'Please input your name' }]}]"
-                v-model="name"
-                  />
-                </a-form-item>
-                <label> 전화번호</label>
-                <a-form-item>
-                  <a-input
-                    size="large"
-                    :placeholder="phone"
-                    v-decorator="['phone', {rules: [{ required: true, message: 'Please input your phone number' }]}]"
-                  v-model="phone"
-                  />
-                </a-form-item>
-                <label> 주소</label>
-                <a-form-item>
-                  <a-input
-                    size="large"
-                  :placeholder="address"
-                    v-decorator="['address', {rules: [{ required: true, message: 'Please input your address' }]}]"
-                  v-model="address" />
-                </a-form-item>
-                <label> 비밀번호</label>
-                <a-form-item>
-                  <a-input
-                    size="large"
-                    type="password"
-                    v-decorator="['password', {rules: [{ required: true, message: 'Please input your password' }]}]"
-                  v-model="password" />
-                </a-form-item>
-              </a-form>
-            </b-card>
-          </div>
-          <b-button variant="success" @click="updateUser">수정하기</b-button>
-          <b-button variant="danger" @click="deleteUser">삭제하기</b-button>
+
+       <div style="padding: 40px 40px 20px 40px; background: #fff;">
+                <table style="border-collapse: collapse; border: 0; width: 100%;">
+                  <tbody>
+                    <tr>
+                      <td>
+                        <h2
+                          style="margin-bottom: 20px; color: #24222f; font-weight: 600"
+                        ><img height="100" src="@/img/img_avatar2.png" /></h2>
+                        <p>
+                        </p>
+                        <br />
+                        <h5
+                          style="font-size:27px;margin-bottom: 20px; color: #24222f; font-weight: 600"
+                        >마이 페이지</h5>
+                        <table style="border-collapse: collapse; border: 0; width: 100%;">
+                         <tr>
+                            <td
+                              style="text-align: left; padding: 30px 10px 10px 0px; border-top: 1px solid #d9d7e0;"
+                            ><label style="text-align:left;font-size:20px;">아이디</label></td>
+                              <td
+                              style="width: 10%; text-align: center; padding: 10px 10px; border-top: 1px solid #d9d7e0;"
+                            ></td>
+                            <td
+                              style="width: 50%; text-align: right; padding: 30px 0px 10px 40px; white-space: nowrap; border-top: 1px solid #d9d7e0;"
+                            ><a-input size="30" style="font-size:20px;" v-model="user.id" readonly/></td>
+                          </tr>
+                         <tr>
+                            <td
+                              style="text-align: left; padding: 30px 10px 10px 0px; border-top: 1px solid #d9d7e0;"
+                            ><label style="text-align:left;font-size:20px;">이름</label></td>
+                              <td
+                              style="width: 10%; text-align: center; padding: 10px 10px; border-top: 1px solid #d9d7e0;"
+                            ></td>
+                            <td
+                              style="width: 50%; text-align: right; padding: 30px 0px 10px 40px; white-space: nowrap; border-top: 1px solid #d9d7e0;"
+                            ><a-input size="30" style="font-size:20px;" v-model="user.name" /></td>
+                          </tr>
+                        <tr>
+                            <td
+                              style="text-align: left; padding: 30px 10px 10px 0px; border-top: 1px solid #d9d7e0;"
+                            ><label style="text-align:left;font-size:20px;">주소</label></td>
+                              <td
+                              style="width: 10%; text-align: center; padding: 10px 10px; border-top: 1px solid #d9d7e0;"
+                            ></td>
+                            <td
+                              style="width: 50%; text-align: right; padding: 30px 0px 10px 40px; white-space: nowrap; border-top: 1px solid #d9d7e0;"
+                            ><a-input size="30" style="font-size:20px;" v-model="user.address" /></td>
+                          </tr>
+                          <tr>
+                            <td
+                              style="text-align: left; padding: 30px 10px 10px 0px; border-top: 1px solid #d9d7e0;"
+                            ><label style="text-align:left;font-size:20px;">핸드폰 번호</label></td>
+                              <td
+                              style="width: 10%; text-align: center; padding: 10px 10px; border-top: 1px solid #d9d7e0;"
+                            ></td>
+                            <td
+                              style="width: 50%; text-align: right; padding: 30px 0px 10px 40px; white-space: nowrap; border-top: 1px solid #d9d7e0;"
+                            ><a-input size="30" style="font-size:20px;" v-model="user.phone" /></td>
+                          </tr>
+                          <tr>
+                            <td
+                              style="text-align: left; padding: 30px 10px 10px 0px; border-top: 1px solid #d9d7e0;"
+                            ><label style="text-align:left;font-size:20px;">비밀번호</label></td>
+                              <td
+                              style="width: 10%; text-align: center; padding: 10px 10px; border-top: 1px solid #d9d7e0;"
+                            ></td>
+                            <td
+                              style="width: 60%; text-align: right; padding: 30px 0px 10px 40px; white-space: nowrap; border-top: 1px solid #d9d7e0;"
+                            ><a-input size="30" type="password" style="font-size:20px;" v-model="password"/></td>
+                          </tr>
+                          <tr>
+                            <td
+                              style="text-align: left; padding: 10px 10px 10px 0px; border-top: 1px solid #d9d7e0;"
+                            >
+                            </td>
+                            <td
+                              style="text-align: left; padding: 10px 10px 10px 0px; border-top: 1px solid #d9d7e0;"
+                            ></td>
+                            <td
+                              style="text-align: left; padding: 10px 10px 10px 0px; border-top: 1px solid #d9d7e0;"
+                            >
+                            </td>
+                          </tr>
+                        </table>
+
+                        <br />
+                        <br />
+                        <h5
+                          style="margin-bottom: 20px; color: #24222f; font-weight: 600"
+                        ></h5>
+                        <table style="border-collapse: collapse; border: 0; width: 100%;">
+
+                           <a-tooltip placement="topLeft">
+                              <template slot="title" v-if="password===''">비밀번호를 입력해주세요</template>
+                               <a-button @click="updateUser();" type="primary">회원정보 수정</a-button>
+                            </a-tooltip>
+                           <a-tooltip placement="topLeft">
+                             <template slot="title" v-if="password===''">비밀번호를 입력해주세요</template>
+                              <a-button @click="deleteUser();" type="danger">회원정보 삭제</a-button>
+                            </a-tooltip>
+                        </table>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
         </b-modal>
       </a-menu-item>
       <a-menu-divider />
@@ -96,11 +153,7 @@ export default {
     return {
       form: this.$form.createForm(this),
       count: 7,
-      id: this.$store.state.user.id,
-      name: this.$store.state.user.name,
-      address: this.$store.state.user.address,
-      phone: this.$store.state.user.phone,
-      password: this.$store.state.user.password,
+      password: '',
     }
   },
   methods: {
@@ -108,20 +161,33 @@ export default {
       this.$store.dispatch('user/LOGOUT')
     },
     updateUser() {
-      var values = { id: this.id, password: this.password, address: this.address, name: this.name, phone: this.phone }
-      this.$store.dispatch('user/UPDATE', { payload: values })
+      var values = { id: this.user.id, password: this.password, address: this.user.address, name: this.user.name, phone: this.user.phone }
+      http
+        .put('/users/update', {
+          uid: this.user.id,
+          upassword: this.password,
+          uname: this.user.name,
+          uphone: this.user.phone,
+          uaddress: this.user.address,
+        })
+        .then(({ data }) => {
+          if (data === 'success') {
+            this.$store.dispatch('user/UPDATE', { payload: values })
+          } else {
+            Vue.prototype.$notification.error({
+              mmessage: '잘못된 비밀번호입니다.',
+              description: '잘못된 비밀번호입니다.',
+            })
+          }
+        })
+      this.password = ''
       this.$bvModal.hide('modal-5')
     },
     deleteUser() {
       http
-        .delete('/users/delete', {
-          uid: this.id,
-          upassword: this.password,
-        })
+        .delete(`/users/delete/${this.user.id}/${this.password}`)
         .then(({ data }) => {
           if (data === 'success') {
-            alert('탈퇴 완료')
-
             this.$bvModal.hide('modal-5')
             this.$store.dispatch('user/LOGOUT')
             Vue.prototype.$notification.success({
@@ -133,6 +199,8 @@ export default {
               mmessage: '잘못된 비밀번호입니다.',
               description: '잘못된 비밀번호입니다.',
             })
+            this.password = ''
+            this.$bvModal.hide('modal-5')
           }
         })
     },

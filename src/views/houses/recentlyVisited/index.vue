@@ -3,6 +3,7 @@
       <div class="col-lg-4" v-for="(item, index) in aptlist" :key="index">
         <cui-general-16
           :isFavorite="true"
+          :no="item.no"
           :name="item.aptName"
           :price="item.dealAmount"
           :src="item.img"
