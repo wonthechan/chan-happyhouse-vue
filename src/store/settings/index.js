@@ -35,8 +35,8 @@ export default {
       isMenuShadow: false,
       isTopbarFixed: false,
       isGrayTopbar: false,
-      isContentMaxWidth: false,
-      isAppMaxWidth: true,
+      isContentMaxWidth: true,
+      isAppMaxWidth: false,
       isGrayBackground: false,
       isCardShadow: true,
       isSquaredBorders: false,
@@ -97,13 +97,6 @@ export default {
       addStyles()
       state.primaryColor = color
       store.set('app.settings.primaryColor', color)
-    },
-    SET_THEME(state, payload) {
-      const { theme } = payload
-      const nextTheme = theme === 'dark' ? 'dark' : 'default'
-      document.querySelector('html').setAttribute('data-kit-theme', nextTheme)
-      state.theme = nextTheme
-      store.set('app.settings.theme', nextTheme)
     },
   },
   actions: {},
