@@ -139,38 +139,20 @@ export default {
     },
     UPDATE({ commit, dispatch, rootState }, { payload }) {
       const { id, email, name, avatar, address, phone, role } = { id: payload.id, email: payload.id.concat('@happyhouse.com'), address: payload.address, phone: payload.phone, name: payload.name, role: 'normal_user' }
-
-      http
-        .put('/users/update', {
-          uid: id,
-          upassword: payload.password,
-          uname: name,
-          uphone: phone,
-          uaddress: address,
-        })
-        .then(({ data }) => {
-          if (data === 'success') {
-            commit('SET_STATE', {
-              id,
-              name,
-              email,
-              avatar,
-              address,
-              phone,
-              role,
-              authorized: true,
-            })
-            Vue.prototype.$notification.success({
-              mmessage: '수정 완료',
-              description: '정보 수정이 완료되었습니다.',
-            })
-          } else {
-            Vue.prototype.$notification.error({
-              mmessage: '잘못된 비밀번호입니다.',
-              description: '잘못된 비밀번호입니다.',
-            })
-          }
-        })
+      commit('SET_STATE', {
+        id,
+        name,
+        email,
+        avatar,
+        address,
+        phone,
+        role,
+        authorized: true,
+      })
+      Vue.prototype.$notification.success({
+        mmessage: '수정 완료',
+        description: '정보 수정이 완료되었습니다.',
+      })
     },
     LOAD_CURRENT_ACCOUNT({ commit, rootState }) {
       return new Promise((resolve, reject) => {
