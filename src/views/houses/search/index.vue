@@ -11,116 +11,102 @@
     </div>
     <div v-else>
       <div style="margin-bottom:50px;" >
-            <div class="form-inline" >
-              <table class="table table-borderless">
-                <tr>
-                  <td align="center">
-
-                   <my-search v-on:searchpass="getInput" />
-
-                  </td>
-                </tr>
-<br />
-              <div v-if="showChart">
-                <div class="row">
-                        <div class="col-lg-6">
-                         <!-- 여기에 서울시 자치구 월별 아파트 거래 금액 연 추이 카드 -->
-                          <monthly-avg-deal-chart initSelected="0"/>
-                          </div>
-                          <div class="col-lg-6">
-                          <monthly-avg-deal-chart initSelected="1"/>
-                       </div>
-                      </div>
-                      <div class="cui__utils__heading" style="margin-top:50px;">
-                     <h5>Recently viewed</h5>
-                       </div>
-                      <recently-visited />
-                    </div>
-<div class = "container" v-else>
-
-   <b-tabs v-if="TOTAL_LIST_ITEM_COUNT!==0">
-          <!-- 탭 기능  (카드 or 맵)-->
-          <b-tab title="리스트 보기" active>
-     <!-- 정렬 -->
-      <tr>
-        <td align="right">
-      <a-select style="width: 150px; margin-right:150px;" class="form-control" v-model="order" @change="aptList(); initPageNo();">
-       <a-select-option  value="">등록일순</a-select-option >
-        <a-select-option  value="asc">낮은가격</a-select-option >
-        <a-select-option  value="desc">높은가격</a-select-option >
-       </a-select>
-       </td>
-      </tr>
-       <!-- 정렬 end -->
-        <!-- aptlist start-->
-            <div class="row e-card-layout">
-        <div class="col-sm-4 col-sm-4 col-sm-4 col-sm-4" style="margin-bottom:50px" v-for="(item, index) in aptlist" v-bind:key="index">
-
-        <div class = "container">
-         <a-card style="width: 300px">
-           <a @click="insertInterestHouse(item.no)" slot="extra"><a-icon style="color:orange;" type="star" /></a>
-              <img @click="aptView(item.no); recentlyVisited(item.no)" class="btn btn-light"
-                src='https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png'
-                style="height: 300px"
-                slot="cover"
-              />
-
-              <!--https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png -->
-              <a-card-meta :description="item.aptName" style="font-size:30px;">
-              </a-card-meta>
-              <a-card-meta :description="item.dealAmount" style="font-size:20px;">
-              </a-card-meta>
-              <br>
-               <h6> {{item.dong}}</h6> <h6>{{Math.floor(item.area)}}m² ({{Math.floor(item.area/3)}}평)  {{item.buildYear}}년 건축</h6>
-
-            </a-card>
-        </div>
-          </div>
-       </div>
-       <!--aptlist end-->
-
-         <!-- paging start -->
-      <div id="paginationWrapper" style="align:center;" v-if="TOTAL_LIST_ITEM_COUNT!==0">
-                <ul class="pagination pagination justify-content-center">
-                  <!-- prev가 true인 경우 -->
-                  <li class="ant-pagination-prev" v-if="prev">
-                    <a class="ant-pagination-item-link" @click.prevent="movePage(startPageIndex - 1)" aria-label="Previous">
-                      <a-icon type="left"/>
-                    </a>
-                  </li>
-
-                  <li v-for="index in range(startPageIndex, endPageIndex)" :key="'item_' + index" :class="{'ant-pagination-item': true, '`ant-pagination-item-${index}`': true, 'ant-pagination-item-active': (index === CURRENT_PAGE_INDEX)}">
-                    <a @click.prevent="movePage(index)" >{{ index }}</a>
-                  </li>
-                  <!-- next가 true인 경우 -->
-                  <li class="ant-pagination-next" v-if="next" >
-                    <a class="ant-pagination-item-link" @click.prevent="movePage(endPageIndex + 1)" aria-label="Next">
-                      <a-icon type="right"/>
-                    </a>
-                  </li>
-                </ul>
+        <div class="form-inline" >
+          <table class="table table-borderless">
+            <tr>
+              <td align="center">
+                <my-search v-on:searchpass="getInput" />
+              </td>
+            </tr>
+            <br/>
+            <div v-if="showChart">
+              <div class="row">
+                <div class="col-lg-6">
+                  <!-- 여기에 서울시 자치구 월별 아파트 거래 금액 연 추이 카드 -->
+                  <monthly-avg-deal-chart initSelected="0"/>
+                  </div>
+                  <div class="col-lg-6">
+                  <monthly-avg-deal-chart initSelected="1"/>
+                </div>
               </div>
-        <!---------------------->
-
-        </b-tab>
-        <!-- 맵 -->
-          <b-tab title="지도 보기">
-            <br><br />
-     <googlemap :maplist="maplist" :key="mapComponentKey" />
-
-          </b-tab>
-          </b-tabs>
-      </div>
-              </table>
-
+              <div class="cui__utils__heading" style="margin-top:50px;">
+                <h5>Recently viewed</h5>
+              </div>
+              <recently-visited />
             </div>
-
-          </div>
-          <!--card-body end-->
-
+            <div class = "container" v-else>
+              <b-tabs v-if="TOTAL_LIST_ITEM_COUNT!==0">
+                <!-- 탭 기능  (카드 or 맵)-->
+                <b-tab title="리스트 보기" active>
+                  <!-- 정렬 -->
+                  <tr>
+                    <td align="right">
+                      <a-select style="width: 150px; margin-right:150px;" class="form-control" v-model="order" @change="aptList(); initPageNo();">
+                        <a-select-option  value="">등록일순</a-select-option >
+                        <a-select-option  value="asc">낮은가격</a-select-option >
+                        <a-select-option  value="desc">높은가격</a-select-option >
+                      </a-select>
+                    </td>
+                  </tr>
+                  <!-- 정렬 end -->
+                  <!-- aptlist start-->
+                  <div class="row e-card-layout">
+                    <div class="col-sm-4 col-sm-4 col-sm-4 col-sm-4" style="margin-bottom:50px" v-for="(item, index) in aptlist" v-bind:key="index">
+                      <div class = "container">
+                        <a-card style="width: 300px">
+                          <a @click="insertInterestHouse(item.no)" slot="extra"><a-icon style="color:orange;" type="star" /></a>
+                          <img @click="aptView(item.no); recentlyVisited(item.no)" class="btn btn-light"
+                            src='https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png'
+                            style="height: 300px"
+                            slot="cover"
+                          />
+                          <!--https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png -->
+                          <a-card-meta :description="item.aptName" style="font-size:30px;">
+                          </a-card-meta>
+                          <a-card-meta :description="item.dealAmount" style="font-size:20px;">
+                          </a-card-meta>
+                          <br>
+                          <h6> {{item.dong}}</h6> <h6>{{Math.floor(item.area)}}m² ({{Math.floor(item.area/3)}}평)  {{item.buildYear}}년 건축</h6>
+                        </a-card>
+                      </div>
+                    </div>
+                  </div>
+                  <!--aptlist end-->
+                  <!-- paging start -->
+                  <div id="paginationWrapper" style="align:center;" v-if="TOTAL_LIST_ITEM_COUNT!==0">
+                    <ul class="pagination pagination justify-content-center">
+                      <!-- prev가 true인 경우 -->
+                      <li class="ant-pagination-prev" v-if="prev">
+                        <a class="ant-pagination-item-link" @click.prevent="movePage(startPageIndex - 1)" aria-label="Previous">
+                          <a-icon type="left"/>
+                        </a>
+                      </li>
+                      <li v-for="index in range(startPageIndex, endPageIndex)" :key="'item_' + index" :class="{'ant-pagination-item': true, '`ant-pagination-item-${index}`': true, 'ant-pagination-item-active': (index === CURRENT_PAGE_INDEX)}">
+                        <a @click.prevent="movePage(index)" >{{ index }}</a>
+                      </li>
+                      <!-- next가 true인 경우 -->
+                      <li class="ant-pagination-next" v-if="next" >
+                        <a class="ant-pagination-item-link" @click.prevent="movePage(endPageIndex + 1)" aria-label="Next">
+                          <a-icon type="right"/>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                  <!---------------------->
+                </b-tab>
+                <!-- 맵 -->
+                <b-tab title="지도 보기">
+                  <br><br />
+                  <googlemap :maplist="maplist" :key="mapComponentKey" />
+                </b-tab>
+              </b-tabs>
+            </div>
+          </table>
         </div>
-
+      </div>
+      <!--card-body end-->
     </div>
+  </div>
 </template>
 <script>
 import Vue from 'vue'

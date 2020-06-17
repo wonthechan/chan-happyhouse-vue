@@ -14,9 +14,6 @@
     >
       <a-back-top />
 
-      <!-- left menu -->
-      <cui-menu-left v-if="settings.menuLayoutType === 'left' && !settings.isMobileView" />
-
       <!-- left menu mobile -->
       <div v-if="settings.isMobileView">
         <div :class="$style.handler" @click="toggleMobileMenu">
@@ -34,7 +31,7 @@
       </div>
 
       <!-- top menu -->
-      <cui-menu-top v-if="settings.menuLayoutType === 'top' && !settings.isMobileView"/>
+      <cui-menu-top v-if="false"/>
       <a-layout>
         <a-layout-header
           :class="{
@@ -66,13 +63,12 @@ import { mapState } from 'vuex'
 
 import CuiTopbar from '@/components/cleanui/layout/Topbar'
 import CuiFooter from '@/components/cleanui/layout/Footer'
-import CuiMenuLeft from '@/components/cleanui/layout/Menu/MenuLeft'
 import CuiMenuTop from '@/components/cleanui/layout/Menu/MenuTop'
 import MyCarousel from '@/components/custom/MyCarousel'
 
 export default {
   name: 'MainLayout',
-  components: { CuiFooter, CuiTopbar, CuiMenuLeft, CuiMenuTop, MyCarousel },
+  components: { CuiFooter, CuiTopbar, CuiMenuTop, MyCarousel },
   computed: mapState(['settings']),
   data: function () {
     return {

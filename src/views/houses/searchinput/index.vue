@@ -12,11 +12,11 @@
                     <a-select-option   value="dong">동 이름</a-select-option >
                   </a-select>
                     <!-- 입력창 -->
-                    <a-input placeholder="원하시는 지역명, 아파트명을 입력해주세요" class="font-weight-bold list-unstyled mr-3" style="width: 700px;height:70px;font-size:20px;padding-left:16px;" enter-button="Search" v-model="searchText">
+                    <a-input placeholder="원하시는 아파트명 또는 지역명을 입력해주세요 :)" class="font-weight-bold list-unstyled mr-3" style="width: 700px;height:70px;font-size:20px;padding-left:16px;" enter-button="Search" v-model="searchText">
 
                     </a-input>
                     <!-- 버튼 클릭 -->
-                    <a-button class="font-weight-bold list-unstyled" style="height:70px; font-size:20px;" type="primary" id="registerArea" @click="passInput('search');">
+                    <a-button class="font-weight-bold list-unstyled mr-3" style="height:70px; font-size:20px;" type="primary" id="registerArea" @click="passInput('search');">
                       찾기
                       </a-button>
                       <a-button class="font-weight-bold list-unstyled" style="height:70px; font-size:20px;" type="primary" id="registerArea" @click="passInput('chart');">
@@ -30,7 +30,7 @@
 export default {
   data() {
     return {
-      searchField: '선택',
+      searchField: 'aptName',
       searchText: '',
     }
   },

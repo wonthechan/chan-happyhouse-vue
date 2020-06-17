@@ -12,12 +12,6 @@
           @click="panTo($event, map)"
         >
         </google-map-marker>
-        <google-map-custom-control
-          :google="google"
-          :map="map"
-          position="BOTTOM_CENTER">
-          <input type="text">
-        </google-map-custom-control>
       </div>
     </google-map>
 </div>
@@ -50,12 +44,6 @@ export default {
   },
   methods: {
     addMarker (e) {
-      // const { lat, lng } = e.latLng.toJSON()
-      // this.markers.push({
-      //   position: {
-      //     lat, lng,
-      //   },
-      // })
     },
     panTo (e, map) {
       map.panTo(e.latLng)

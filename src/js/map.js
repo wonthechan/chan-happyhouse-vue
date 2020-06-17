@@ -37,11 +37,9 @@ export default (key) => {
           },
           zoom: 12,
         })
-
         map.addListener('click', (e) => {
           this.$emit('click', e)
         })
-
         this.map = map
       },
     },
