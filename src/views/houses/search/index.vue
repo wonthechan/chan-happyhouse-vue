@@ -27,7 +27,7 @@
 
                     </a-input>
                     <!-- 버튼 클릭 -->
-                    <a-button class="font-weight-bold list-unstyled" style="height:70px; font-size:20px;" type="primary" id="registerArea" @click="aptList(); msg(); initPageNo(); initOrder(); mapList();">
+                    <a-button class="font-weight-bold list-unstyled" style="height:70px; font-size:20px;" type="primary" id="registerArea" @click="aptList(); msg(); initPageNo(); initOrder(); mapList(); refreshMapComponent();">
                       찾기
                       </a-button></div>
                   </td>
@@ -103,7 +103,7 @@
         <!-- 맵 -->
           <b-tab title="지도 보기">
             <br><br />
-     <googlemap :maplist="maplist"/>
+     <googlemap :maplist="maplist" :key="mapComponentKey" />
 
           </b-tab>
           </b-tabs>
@@ -133,6 +133,7 @@ export default {
   },
   data() {
     return {
+      mapComponentKey: 0,
       uid: this.$store.state.user.email.substring(0, this.$store.state.user.email.indexOf('@')),
       order: '',
       searchField: '선택',
@@ -244,6 +245,10 @@ export default {
         .then(({ data }) => {
           this.maplist = data
         })
+    },
+    // 맵 컴포넌트를 리프레쉬
+    refreshMapComponent() {
+      this.mapComponentKey += 1
     },
     // 페이징
     addPagination() {
