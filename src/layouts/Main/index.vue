@@ -43,7 +43,7 @@
           <cui-topbar />
         </a-layout-header>
           <my-carousel v-if="false"/>
-        <a-layout-content style="height: '100%';  position: 'relative'">
+        <a-layout-content style="height: '100%'; position: 'relative'">
           <div class="cui__utils__content">
             <transition :name="settings.routerAnimation" mode="out-in">
               <router-view />

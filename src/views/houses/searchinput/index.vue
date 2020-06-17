@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-jumbotron style="background-image: url(https://www.synergybroadbeach.com.au/wp-content/uploads/2016/02/banner-2-bedroom.jpg);background-size: cover;" >
+    <b-jumbotron style="background-image: url(https://cdn.hipwallpaper.com/i/83/87/4nDiwY.jpg);background-size: cover;" >
       <h1 slot="header" class="font-weight-bold text-white font-size-50 list-unstyled mr-3" align="center" style="padding-top:50px;margin-bottom:40px;">
         <strong>아파트 / 주택을 검색하세요 ! <img style="margin-bottom:15px;" src="https://img.icons8.com/cotton/64/000000/cottage.png"/></strong>
       </h1>
