@@ -10,30 +10,33 @@
     />
     </div>
     <div v-else>
-    <div class="row ">
-      <div class="col-lg-12" style="margin-bottom:50px;margin-top:50px;" >
+      <div style="margin-bottom:50px;" >
             <div class="form-inline" >
               <table class="table table-borderless">
                 <tr>
                   <td align="center">
-                    <div>
-                    <!-- 선택옵션 -->
-                  <a-select size="large" class="font-weight-bold list-unstyled mr-3" :value="searchField" style="width: 150px;font-size:20px;color:#96939c;" v-model="searchField">
-                    <a-select-option  value="aptName">아파트 이름</a-select-option >
-                    <a-select-option   value="dong">동 이름</a-select-option >
-                  </a-select>
-                    <!-- 입력창 -->
-                    <a-input placeholder="원하시는 지역명, 아파트명을 입력해주세요" class="font-weight-bold list-unstyled mr-3" style="width: 700px;height:70px;font-size:20px;padding-left:16px;" enter-button="Search" v-model="searchText">
 
-                    </a-input>
-                    <!-- 버튼 클릭 -->
-                    <a-button class="font-weight-bold list-unstyled" style="height:70px; font-size:20px;" type="primary" id="registerArea" @click="aptList(); msg(); initPageNo(); initOrder(); mapList();">
-                      찾기
-                      </a-button></div>
+                   <my-search v-on:searchpass="getInput" />
+
                   </td>
                 </tr>
-<br /><br /><br />
-<div class = "container">
+<br />
+              <div v-if="showChart">
+                <div class="row">
+                        <div class="col-lg-6">
+                         <!-- 여기에 서울시 자치구 월별 아파트 거래 금액 연 추이 카드 -->
+                          <monthly-avg-deal-chart initSelected="0"/>
+                          </div>
+                          <div class="col-lg-6">
+                          <monthly-avg-deal-chart initSelected="1"/>
+                       </div>
+                      </div>
+                      <div class="cui__utils__heading" style="margin-top:50px;">
+                     <h5>Recently viewed</h5>
+                       </div>
+                      <recently-visited />
+                    </div>
+<div class = "container" v-else>
 
    <b-tabs v-if="TOTAL_LIST_ITEM_COUNT!==0">
           <!-- 탭 기능  (카드 or 맵)-->
@@ -57,7 +60,7 @@
          <a-card style="width: 300px">
            <a @click="insertInterestHouse(item.no)" slot="extra"><a-icon style="color:orange;" type="star" /></a>
               <img @click="aptView(item.no); recentlyVisited(item.no)" class="btn btn-light"
-                :src="`../../img/apt/${item.img}`"
+                src='https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png'
                 style="height: 300px"
                 slot="cover"
               />
@@ -118,18 +121,22 @@
         </div>
 
     </div>
-      </div>
 </template>
 <script>
 import Vue from 'vue'
 import http from '@/util/http-common.js'
 import Detail from '@/views/houses/detail'
+import MySearch from '@/views/houses/searchinput'
 import googlemap from '@/views/houses/googlemap'
+import MonthlyAvgDealChart from '@/components/custom/analytics/MonthlyAvgDealChart'
+import RecentlyVisited from '@/views/houses/recentlyVisited'
 export default {
-  name: 'houseSearch',
   components: {
     Detail,
     googlemap,
+    MySearch,
+    MonthlyAvgDealChart,
+    RecentlyVisited,
   },
   data() {
     return {
@@ -153,6 +160,7 @@ export default {
       endPageIndex: 0,
       prev: false,
       goDetail: false,
+      showChart: true,
       // map data
       markers: [],
       width: 730,
@@ -174,6 +182,21 @@ export default {
     this.goDetail = false
   },
   methods: {
+    getInput: function(payload) {
+      if (payload === 'chart') {
+        this.showChart = true
+      } else {
+        this.searchField = payload.searchField
+        this.searchText = payload.searchText
+        this.aptList()
+        this.msg()
+        this.initPageNo()
+        this.initOrder()
+        this.mapList()
+        this.showResult = true
+        this.showChart = false
+      }
+    },
     // 검색 결과 정보를 9개씩 불러온다.
     aptList() {
       if (this.searchField === '선택') {

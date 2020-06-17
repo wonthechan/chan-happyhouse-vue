@@ -13,7 +13,7 @@ export default {
 </script>
 <style scoped>
 .ant-carousel >>> .slick-slide {
-  height: 300px;
+  height: 500px;
   line-height: 300px;
   overflow: hidden;
 }

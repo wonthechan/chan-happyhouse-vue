@@ -36,15 +36,16 @@
             </div>
 
               <a-tabs defaultActiveKey="1">
-                 <a-tab-pane tab="상세 설명" key="1" forceRender></a-tab-pane>
-        <a-tab-pane tab="더 많은 사진 보기" key="2">
-          <img width="118" height="110" style="margin-right:20px;" src="@/img/apt/경희궁의아침.jpg" />
-          <img width="118" height="110" style="margin-right:20px;" src="@/img/apt/무악동현대.jpg" />
-          <img width="118" height="110" style="margin-right:20px;" src="@/img/apt/현대뜨레비앙.jpg" />
-          <img width="118" height="110" style="margin-right:20px;" src="@/img/apt/평창동갑을.jpg" />
-          <img width="118" height="110" style="margin-right:20px;" src="@/img/apt/평동경희궁자이(3단지).jpg"/>
-          <img width="118" height="110" style="margin-right:20px;" src="@/img/apt/숭인동롯데캐슬천지인.jpg"/>
+        <a-tab-pane tab="더 많은 사진 보기" key="1">
+          <div style="margin-top:10px;">
+          <img width="110" height="110" style="margin-right:20px;" src="@/img/apt/경희궁의아침.jpg" />
+          <img width="110" height="110" style="margin-right:20px;" src="@/img/apt/무악동현대.jpg" />
+          <img width="110" height="110" style="margin-right:20px;" src="@/img/apt/현대뜨레비앙.jpg" />
+          <img width="110" height="110" style="margin-right:20px;" src="@/img/apt/평창동갑을.jpg" />
+          <img width="110" height="110" style="margin-right:20px;" src="@/img/apt/평동경희궁자이(3단지).jpg"/>
+          <img width="110" height="110" style="margin-right:20px;" src="@/img/apt/숭인동롯데캐슬천지인.jpg"/>
           <a @click="search()" style="float:right;margin-top:35px;font-size:30px;">→</a>
+          </div>
           </a-tab-pane>
       </a-tabs>
 

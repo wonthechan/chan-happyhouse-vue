@@ -13,7 +13,7 @@
         <i class="fe fe-heart font-size-21"></i>
       </a>
       <div :class="$style.image" class="border-bottom height-250 mb-3">
-        <img class="img-fluid" :src="require(`@/img/apt/${src}`)"
+        <img class="img-fluid" src='https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png'
  :alt="name" />
       </div>
       <a href="javascript:void(0);" class="font-size-24 text-dark">

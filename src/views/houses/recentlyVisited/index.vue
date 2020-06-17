@@ -6,7 +6,7 @@
           :no="item.no"
           :name="item.aptName"
           :price="item.dealAmount"
-          :src="item.img"
+          :src='"item.img"'
           :dong="item.dong"
           :area="item.area"
         />
