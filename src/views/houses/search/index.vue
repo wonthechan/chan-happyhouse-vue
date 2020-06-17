@@ -241,10 +241,10 @@ export default {
     },
     // 맵에 좌표 찍어올 distinct 아파트 리스트 받아오기
     mapList() {
-      this.refreshMapComponent()
       http.post('/houses/map', { searchField: this.searchField, searchText: this.searchText })
         .then(({ data }) => {
           this.maplist = data
+          this.refreshMapComponent() // 리스트를 다 받아오면 그 때 리프레쉬 하자! (then 안에 넣기)
         })
     },
     // 맵 컴포넌트를 리프레쉬
