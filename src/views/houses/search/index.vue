@@ -106,7 +106,7 @@
         <!-- 맵 -->
           <b-tab title="지도 보기">
             <br><br />
-     <googlemap :maplist="maplist"/>
+     <googlemap :maplist="maplist" :key="mapComponentKey" />
 
           </b-tab>
           </b-tabs>
@@ -140,6 +140,7 @@ export default {
   },
   data() {
     return {
+      mapComponentKey: 0,
       uid: this.$store.state.user.email.substring(0, this.$store.state.user.email.indexOf('@')),
       order: '',
       searchField: '선택',
@@ -263,10 +264,15 @@ export default {
     },
     // 맵에 좌표 찍어올 distinct 아파트 리스트 받아오기
     mapList() {
+      this.refreshMapComponent()
       http.post('/houses/map', { searchField: this.searchField, searchText: this.searchText })
         .then(({ data }) => {
           this.maplist = data
         })
+    },
+    // 맵 컴포넌트를 리프레쉬
+    refreshMapComponent() {
+      this.mapComponentKey += 1
     },
     // 페이징
     addPagination() {
