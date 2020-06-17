@@ -10,19 +10,8 @@
 
     </div>
     <div class="card" :class="$style.container">
-      <div class="text-dark font-size-24 mb-3">
+      <div class="text-dark font-size-24 mb-4">
         <strong>로그인</strong>
-      </div>
-      <div class="mb-4">
-        <!--
-        <a-radio-group
-          :value="settings.authProvider"
-          @change="e => changeAuthProvider(e.target.value)"
-        >
-          <a-radio value="firebase">Firebase</a-radio>
-          <a-radio value="jwt">JWT</a-radio>
-        </a-radio-group>
-        -->
       </div>
       <a-form class="mb-4" :form="form" @submit="handleSubmit">
         <a-form-item>
@@ -50,9 +39,7 @@
           <strong>로그인</strong>
         </a-button>
       </a-form>
-        <a @click.prevent="loginWithKakao()">
-          <img src="https://developers.kakao.com/tool/resource/static/img/button/login/full/ko/kakao_login_medium_wide.png" width="416px" height="53px">
-        </a>
+        <button class="kakao_btn font-weight-bold" @click.prevent="loginWithKakao()"><a-icon type="login" /><span class="ml-2">카카오 로그인</span></button>
         <br>
       <router-link to="/auth/forgot-password" class="kit__utils__link font-size-16">비밀번호 찾기</router-link>
     </div>
@@ -148,4 +135,18 @@ export default {
 </script>
 <style lang="scss" module>
 @import "@/components/cleanui/system/Auth/style.module.scss";
+</style>
+
+<style scoped>
+.kakao_btn {
+    display: block;
+    width: 100%;
+    height: 38px;
+    padding: 0;
+    border: 0;
+    border-radius: 4px;
+    font-size: 15px;
+    color: #333;
+    background-color: #ffe500;
+}
 </style>
