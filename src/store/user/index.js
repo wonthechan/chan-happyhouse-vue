@@ -119,12 +119,12 @@ export default {
           console.log(data)
           if (data === 'success') {
             Vue.prototype.$notification.success({
-              message: 'Succesful Registered',
-              description: 'You have successfully registered!',
+              message: '회원 가입 완료!',
+              description: '회원 가입이 정상적으로 처리되었습니다.',
             })
           } else {
             Vue.prototype.$notification.error({
-              message: 'Register Failure',
+              message: '회원 가입 실패',
               description: '같은 id 의 사용자가 존재합니다.',
             })
           }
