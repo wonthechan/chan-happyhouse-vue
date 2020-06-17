@@ -6,8 +6,9 @@
     <div class="card-body">
       <a
         href="#"
+        @click="insertInterestHouse(no)"
         v-on:click="toggleFavorite"
-        :class="[$style.favorite, favorite ? 'text-red' : 'text-gray-3']"
+        :class="[$style.favorite, favorite ? 'text-gray-3' : 'text-red']"
       >
         <i class="fe fe-heart font-size-21"></i>
       </a>
@@ -30,9 +31,11 @@
   </div>
 </template>
 <script>
+import Vue from 'vue'
+import http from '@/util/http-common.js'
 export default {
   name: 'KitGeneral16',
-  props: ['isNew', 'isFavorite', 'src', 'name', 'price', 'dong', 'area'],
+  props: ['isNew', 'isFavorite', 'src', 'name', 'price', 'dong', 'area', 'no'],
   data: function() {
     return {
       favorite: this.isFavorite,
@@ -42,6 +45,15 @@ export default {
     toggleFavorite: function (event) {
       event.preventDefault()
       this.favorite = !this.favorite
+    },
+    insertInterestHouse(no) {
+      http.post('/houses/interest/insert', { uid: this.uid, no: no })
+        .then(({ data }) => {
+          Vue.prototype.$notification.success({
+            message: '아파트 즐겨찾기 등록 성공.',
+            description: '즐겨찾기에 정상적으로 등록되었습니다.',
+          })
+        })
     },
   },
 }
