@@ -11,7 +11,7 @@
         <div class="row e-card-layout">
           <div class="col-sm-4 col-sm-4 col-sm-4 col-sm-4" style="margin-bottom:50px" v-for="(item, index) in aptlist" :key="'item_' + index">
             <div class = "container">
-              <a-card style="width: 300px">
+              <a-card style="width: 230px">
                 <a @click="deleteInterestHouse(item.no)" slot="extra"><a-icon style="color:red;" type="close-circle" /></a>
                 <img @click="aptView(item.no)" v-b-modal.modal-1 class="btn btn-light"
                   alt="example"

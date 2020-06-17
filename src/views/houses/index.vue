@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div> <!-- 이 파일은 의미없는 파일입니다! -->
     <h5 class="mb-3">
       <strong>Table Component Preview</strong>
     </h5>

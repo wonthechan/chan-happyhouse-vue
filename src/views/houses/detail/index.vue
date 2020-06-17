@@ -15,11 +15,12 @@
             >
               <i class="fe fe-heart font-size-21"></i>
             </a>
-            <img src="@/img/apt/건양하늘터.jpg" style="height: 500px" />
+            <img src="@/img/apt/apt(4).jpg" width="380px" style="height: 500px;" />
 
             <div class="d-flex flex-wrap mb-3">
             </div>
           </div>
+
           <div class="col-lg-8">
             <div class="font-weight-light text-dark mb-2">
               <h1>{{apt.aptName}}</h1>
@@ -37,13 +38,13 @@
 
               <a-tabs defaultActiveKey="1">
         <a-tab-pane tab="더 많은 사진 보기" key="1">
-          <div style="margin-top:10px;">
-          <img width="110" height="110" style="margin-right:20px;" src="@/img/apt/경희궁의아침.jpg" />
-          <img width="110" height="110" style="margin-right:20px;" src="@/img/apt/무악동현대.jpg" />
-          <img width="110" height="110" style="margin-right:20px;" src="@/img/apt/현대뜨레비앙.jpg" />
-          <img width="110" height="110" style="margin-right:20px;" src="@/img/apt/평창동갑을.jpg" />
-          <img width="110" height="110" style="margin-right:20px;" src="@/img/apt/평동경희궁자이(3단지).jpg"/>
-          <img width="110" height="110" style="margin-right:20px;" src="@/img/apt/숭인동롯데캐슬천지인.jpg"/>
+          <div style="margin-top:13px;">
+          <img width="110" height="115" style="margin-right:20px;" src="@/img/apt/경희궁의아침.jpg" />
+          <img width="110" height="115" style="margin-right:20px;" src="@/img/apt/무악동현대.jpg" />
+          <img width="110" height="115" style="margin-right:20px;" src="@/img/apt/현대뜨레비앙.jpg" />
+          <img width="110" height="115" style="margin-right:20px;" src="@/img/apt/평창동갑을.jpg" />
+          <img width="110" height="115" style="margin-right:20px;" src="@/img/apt/평동경희궁자이(3단지).jpg"/>
+          <img width="110" height="115" style="margin-right:20px;" src="@/img/apt/숭인동롯데캐슬천지인.jpg"/>
           <a @click="search()" style="float:right;margin-top:35px;font-size:30px;">→</a>
           </div>
           </a-tab-pane>
@@ -55,7 +56,7 @@
         </div>
       </div>
     </div>
-     <a-divider orientation="left" style="margin-bottom:30px;">
+     <a-divider orientation="left" style="margin-bottom:20px;">
     <ul class="font-weight-bold list-unstyled font-size-30 mb-5">
         </ul>
     </a-divider>

@@ -36,7 +36,7 @@
                        </div>
                       <recently-visited />
                     </div>
-<div class = "container" v-else>
+<div v-else>
 
    <b-tabs v-if="TOTAL_LIST_ITEM_COUNT!==0">
           <!-- 탭 기능  (카드 or 맵)-->
@@ -44,7 +44,7 @@
      <!-- 정렬 -->
       <tr>
         <td align="right">
-      <a-select style="width: 150px; margin-right:150px;" class="form-control" v-model="order" @change="aptList(); initPageNo();">
+      <a-select style="width: 150px; margin-right:150px;margin-top:10px;margin-bottom:20px;" class="form-control" v-model="order" @change="aptList(); initPageNo();">
        <a-select-option  value="">등록일순</a-select-option >
         <a-select-option  value="asc">낮은가격</a-select-option >
         <a-select-option  value="desc">높은가격</a-select-option >
@@ -53,14 +53,14 @@
       </tr>
        <!-- 정렬 end -->
         <!-- aptlist start-->
-            <div class="row e-card-layout">
-        <div class="col-sm-4 col-sm-4 col-sm-4 col-sm-4" style="margin-bottom:50px" v-for="(item, index) in aptlist" v-bind:key="index">
+            <div class="row e-card-layout" style="margin-left:2px;">
+        <div class="col-sm-4 col-sm-4 col-sm-4 col-sm-4" style="margin-bottom:50px;" v-for="(item, index) in aptlist" v-bind:key="index">
 
         <div class = "container">
-         <a-card style="width: 300px">
+         <a-card style="width: 370px">
            <a @click="insertInterestHouse(item.no)" slot="extra"><a-icon style="color:orange;" type="star" /></a>
-              <img @click="aptView(item.no); recentlyVisited(item.no)" class="btn btn-light"
-                src='https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png'
+              <img @click="aptView(item.no);" v-b-modal.modal-1 class="btn btn-light"
+                :src="require(`@/img/apt/${item.img}`)"
                 style="height: 300px"
                 slot="cover"
               />
@@ -119,7 +119,31 @@
           <!--card-body end-->
 
         </div>
-
+ <b-modal id="modal-1"
+        :title="apt.aptName"
+        :header-bg-variant="headerBgVariant"
+        :header-text-variant="headerTextVariant"
+        hide-footer="true"
+        centered>
+      <div>
+        <table class="table table-hover">
+          <thead>
+          </thead>
+          <tbody id="areaTbody">
+            <tr>
+              <td>위치</td><td>서울시 종로구 {{apt.aptdong}} {{apt.jibun}}번지</td>
+            </tr>
+            <tr><td>가격</td><td>{{apt.dealAmount}}</td></tr>
+            <tr><td>실평수</td><td>{{Math.floor(apt.area)}} ({{Math.floor(apt.area/3)}}평)</td></tr>
+            <tr><td>층수</td><td>{{apt.floor}} 층</td></tr>
+            <tr><td>거래타입</td><td>아파트 매매</td></tr>
+            <tr><td>거래일자</td><td>{{apt.dealYear}}년 {{apt.dealMonth}}월 {{apt.dealDay}}일</td></tr>
+            <tr><td>건축년도</td><td>{{apt.buildYear}}</td></tr>
+            <tr><td>법정동코드</td><td>{{apt.code}}</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </b-modal>
     </div>
 </template>
 <script>
@@ -190,7 +214,6 @@ export default {
         this.searchField = payload.searchField
         this.searchText = payload.searchText
         this.aptList()
-        this.msg()
         this.initPageNo()
         this.initOrder()
         this.mapList()
@@ -212,17 +235,6 @@ export default {
           })
       }
     },
-    // 검색 결과 개수 알림
-    msg() {
-      setTimeout(() => {
-        if (this.TOTAL_LIST_ITEM_COUNT === 0 && this.searchField !== '선택') {
-          Vue.prototype.$notification.warn({
-            message: '검색 결과가 없습니다.',
-            description: '다시 입력해 주세요.',
-          })
-        }
-      }, 1000)
-    },
     // 리스트를 뷰에 뿌린 뒤, 페이징을 하기 위하여 전체 아파트 개수를 구한다.
     aptListTotalCnt() {
       http.post('/houses/count', { searchField: this.searchField, searchText: this.searchText })
@@ -240,7 +252,6 @@ export default {
       http.get(`/houses/detail/${no}`)
         .then(({ data }) => {
           this.apt = data
-          this.goDetail = true
         })
     },
     fromDetail() {
