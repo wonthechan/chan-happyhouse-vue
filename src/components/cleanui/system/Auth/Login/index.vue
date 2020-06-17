@@ -57,8 +57,8 @@
       <router-link to="/auth/forgot-password" class="kit__utils__link font-size-16">비밀번호 찾기</router-link>
     </div>
     <div class="text-center pt-2 mb-auto">
-      <span class="mr-2">아직 회원이 아니세요?</span>
-      <router-link to="/auth/register" class="kit__utils__link font-size-16">이메일로 회원가입</router-link>
+      <span class="mr-2">아직 회원이 아니신가요?</span>
+      <router-link to="/auth/register" class="kit__utils__link font-size-16">회원가입</router-link>
     </div>
   </div>
 </template>

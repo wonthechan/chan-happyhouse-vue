@@ -2,7 +2,7 @@
   <div>
     <div class="card" :class="$style.container">
       <div class="text-dark font-size-24 mb-4">
-        <strong>Create your account</strong>
+        <strong>환영합니다!</strong>
       </div>
       <div class="mb-4">
 
@@ -12,40 +12,40 @@
         <a-form-item>
           <a-input
             size="large"
-            placeholder="Id"
-            v-decorator="['id', {rules: [{ required: true, message: 'Please input your id' }]}]"
+            placeholder="아이디"
+            v-decorator="['id', {rules: [{ required: true, message: '아이디를 입력해주세요!' }]}]"
           />
         </a-form-item>
         <a-form-item>
           <a-input
             size="large"
             type="password"
-            placeholder="Password"
-            v-decorator="['password', {rules: [{ required: true, message: 'Please input your password' }]}]"
+            placeholder="비밀번호"
+            v-decorator="['password', {rules: [{ required: true, message: '비밀번호를 입력해주세요!' }]}]"
           />
         </a-form-item>
 
  <a-form-item>
           <a-input
             size="large"
-            placeholder="Full Name"
-            v-decorator="['name', {rules: [{ required: true, message: 'Please input your full name' }]}]"
+            placeholder="닉네임"
+            v-decorator="['name', {rules: [{ required: true, message: '닉네임을 입력해주세요!' }]}]"
           />
         </a-form-item>
 
          <a-form-item>
           <a-input
             size="large"
-            placeholder="Address"
-            v-decorator="['address', {rules: [{ required: true, message: 'Please input your address' }]}]"
+            placeholder="주소"
+            v-decorator="['address', {rules: [{ required: true, message: '주소를 입력해주세요!' }]}]"
           />
         </a-form-item>
 
          <a-form-item>
           <a-input
             size="large"
-            placeholder="Phone Number"
-            v-decorator="['phone', {rules: [{ required: true, message: 'Please input your phone number' }]}]"
+            placeholder="연락처"
+            v-decorator="['phone', {rules: [{ required: true, message: '연락처를 입력해주세요!' }]}]"
           />
         </a-form-item>
 
@@ -56,7 +56,7 @@
           :loading="loading"
           htmlType="submit"
         >
-          <strong>Sign Up</strong>
+          <strong>회원 가입</strong>
         </a-button>
       </a-form>
       <div>
@@ -66,8 +66,8 @@
       </div>
     </div>
     <div class="text-center pt-2 mb-auto">
-      <span class="mr-2">Already have an account?</span>
-      <router-link to="/auth/login" class="kit__utils__link font-size-16">Sign in</router-link>
+      <span class="mr-2">이미 계정이 있으신가요?</span>
+      <router-link to="/auth/login" class="kit__utils__link font-size-16">로그인</router-link>
     </div>
   </div>
 </template>
