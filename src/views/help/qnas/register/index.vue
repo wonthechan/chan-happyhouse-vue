@@ -81,8 +81,7 @@ export default {
     // 공지사항 등록하기
     registerQna() {
       // 카카오로 로그인한 경우 DB에 계정 정보가 없기 때문에 외래키 참조 제약조건에 위반되어 공지사항(qna_board)에 삽입할 수 없음.
-      // 일단은 ssafy로 등록함.
-      http.post('/vue/api/qnas', { uid: 'ssafy', title: this.qnaTitle, content: this.qnaContent })
+      http.post('/vue/api/qnas', { uid: this.$store.state.user.id, title: this.qnaTitle, content: this.qnaContent })
         .then(({ data }) => {
           if (data === 'success') {
             this.$notification.success({
