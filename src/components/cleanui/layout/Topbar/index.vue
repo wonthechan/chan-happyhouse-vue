@@ -5,6 +5,9 @@
       <a href="/main">
         <a-icon style="font-size: 25px;" class="mr-2" type="home" />
         <span style="font-size: 25px;" class="font-weight-bold">Happy House</span>
+        <span class="font-weight-bold ml-2 mr-2">X</span>
+        <img src="@/img/logo1.png" width="25px">
+        <span class="font-weight-bold ml-2 mr-2">powered by vue.js</span>
       </a>
     </div>
     <div class="mr-auto">

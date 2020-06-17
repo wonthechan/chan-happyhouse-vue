@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-jumbotron style="background-image: url(https://www.synergybroadbeach.com.au/wp-content/uploads/2016/02/banner-2-bedroom.jpg);background-size: cover;" >
+    <b-jumbotron style="background-image: url(https://cdn.hipwallpaper.com/i/83/87/4nDiwY.jpg);background-size: cover;" >
       <h1 slot="header" class="font-weight-bold text-white font-size-50 list-unstyled mr-3" align="center" style="padding-top:50px;margin-bottom:40px;">
         <strong>아파트 / 주택을 검색하세요 ! <img style="margin-bottom:15px;" src="https://img.icons8.com/cotton/64/000000/cottage.png"/></strong>
       </h1>
@@ -12,11 +12,11 @@
                     <a-select-option   value="dong">동 이름</a-select-option >
                   </a-select>
                     <!-- 입력창 -->
-                    <a-input placeholder="원하시는 지역명, 아파트명을 입력해주세요" class="font-weight-bold list-unstyled mr-3" style="width: 700px;height:70px;font-size:20px;padding-left:16px;" enter-button="Search" v-model="searchText">
+                    <a-input placeholder="원하시는 아파트명 또는 지역명을 입력해주세요 :)" class="font-weight-bold list-unstyled mr-3" style="width: 700px;height:70px;font-size:20px;padding-left:16px;" enter-button="Search" v-model="searchText">
 
                     </a-input>
                     <!-- 버튼 클릭 -->
-                    <a-button class="font-weight-bold list-unstyled" style="height:70px; font-size:20px;" type="primary" id="registerArea" @click="passInput('search');">
+                    <a-button class="font-weight-bold list-unstyled mr-3" style="height:70px; font-size:20px;" type="primary" id="registerArea" @click="passInput('search');">
                       찾기
                       </a-button>
                       <a-button class="font-weight-bold list-unstyled" style="height:70px; font-size:20px;" type="primary" id="registerArea" @click="passInput('chart');">
@@ -30,7 +30,7 @@
 export default {
   data() {
     return {
-      searchField: '선택',
+      searchField: 'aptName',
       searchText: '',
     }
   },
