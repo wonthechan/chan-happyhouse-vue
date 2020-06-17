@@ -1,5 +1,7 @@
 <template>
   <div>
+    <!-- 새로 배너들어가는부분 -->
+    <my-carousel />
     <div class="row">
       <a-tabs default-active-key="1" tab-position="top">
         <a-tab-pane key="1" tab="검색">
@@ -25,10 +27,12 @@
 <script>
 import MonthlyAvgDealChart from '@/components/custom/analytics/MonthlyAvgDealChart'
 import HouseSearch from '@/views/houses/search'
+import MyCarousel from '@/components/custom/MyCarousel'
 export default {
   components: {
     MonthlyAvgDealChart,
     HouseSearch,
+    MyCarousel,
   },
 }
 </script>

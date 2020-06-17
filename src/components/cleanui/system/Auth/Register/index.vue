@@ -76,7 +76,6 @@ export default {
   },
   methods: {
     join() {
-      alert(this.id)
       var values = { id: this.id, password: this.password, address: this.address, name: this.name, phone: this.phone }
       this.$store.dispatch('user/REGISTER', { payload: values })
     },
