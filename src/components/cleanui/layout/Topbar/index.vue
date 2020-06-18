@@ -11,24 +11,7 @@
       </a>
     </div>
     <div class="mr-auto">
-      <cui-search v-if="false"/>
     </div>
-    <div class="mr-4 d-none d-md-block" v-if="false">
-      <cui-issues-history v-if="false"/>
-    </div>
-    <div class="mb-0 mr-auto d-xl-block d-none" v-if="false">
-      <cui-project-management v-if="false"/>
-    </div>
-    <div class="mr-4 d-none d-sm-block" v-if="false">
-      <cui-language-switcher v-if="false"/>
-    </div>
-    <div class="mr-4 d-none d-sm-block" v-if="false">
-      <cui-actions v-if="false"/>
-    </div>
-
-    <!-- MenuTop 새로 삽입 -->
-    <!-- <div :class="$style.navigation">
-    </div> -->
     <a-menu :mode="'horizontal'" :selectedKeys="selectedKeys" @click="handleClick">
       <template v-for="item in menuData">
         <template v-if="true || !item.roles || item.roles.includes(user.role)">
@@ -49,11 +32,6 @@
 </template>
 
 <script>
-import CuiIssuesHistory from './IssuesHistory'
-import CuiProjectManagement from './ProjectManagement'
-import CuiSearch from './Search'
-import CuiLanguageSwitcher from './LanguageSwitcher'
-import CuiActions from './Actions'
 import CuiUserMenu from './UserMenu'
 
 // MenuTop 관련
@@ -64,11 +42,6 @@ import Item from './partials/item'
 
 export default {
   components: {
-    CuiIssuesHistory,
-    CuiProjectManagement,
-    CuiSearch,
-    CuiLanguageSwitcher,
-    CuiActions,
     CuiUserMenu,
     SubMenu, // MenuTop
     Item,
@@ -77,13 +50,9 @@ export default {
     return {
       menuData: getMenuData,
       selectedKeys: [],
-      openKeys: [],
     }
   },
   watch: {
-    'settings.isMenuCollapsed'() {
-      this.openKeys = []
-    },
     '$route'() {
       this.setSelectedKeys()
     },

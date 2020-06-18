@@ -5,22 +5,15 @@ import router from '@/router'
 import http from '@/util/http-common.js'
 
 import * as firebase from '@/services/firebase'
-import * as jwt from '@/services/jwt'
 import * as kakao from '@/services/kakao'
 
 const mapAuthProviders = {
-  // 밑에 firebase랑 jwt는 나중에 뺄 예정
+  // DB 로그인
   firebase: {
     login: firebase.login,
     register: firebase.register,
     currentAccount: firebase.currentAccount,
     logout: firebase.logout,
-  },
-  jwt: {
-    login: jwt.login,
-    register: jwt.register,
-    currentAccount: jwt.currentAccount,
-    logout: jwt.logout,
   },
   // 카카오 로그인
   kakao: {
@@ -131,7 +124,7 @@ export default {
         })
         .catch((error) => {
           Vue.prototype.$notification.error({
-            message: 'Register Failure',
+            message: '회원 가입 실패',
             description: '등록 중 문제가 발생하였습니다.',
           })
         })

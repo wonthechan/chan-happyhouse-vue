@@ -60,7 +60,7 @@
          <a-card style="width: 370px">
            <a @click="insertInterestHouse(item.no);" slot="extra"><a-icon style="color:orange;" type="star" /></a>
               <img @click="aptView(item.no);recentlyVisited(item.no);" v-b-modal.modal-1 class="btn btn-light"
-                :src="require(`@/img/apt/${item.img}`)"
+                src="@/img/apt/아남1.jpg"
                 style="height: 300px"
                 slot="cover"
               />
