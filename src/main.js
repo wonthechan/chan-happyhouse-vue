@@ -43,6 +43,8 @@ Vue.use(vueGoogleMapWrapper, { apiKey: process.env.VUE_APP_GOOGLE_MAP_API_KEY })
 Vue.config.productionTip = false
 const nprogress = new NProgress({ parent: 'body' })
 
+window.Kakao.init(process.env.VUE_APP_KAKAO_API_KEY)
+
 new Vue({
   router,
   store,
