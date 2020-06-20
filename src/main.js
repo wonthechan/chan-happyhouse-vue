@@ -26,7 +26,7 @@ import vueMoment from 'vue-moment'
 // naver map api
 import naver from 'vue-naver-maps'
 Vue.use(naver, {
-  clientID: '0kmpf0u5gz',
+  clientID: process.env.VUE_APP_NAVER_MAP_API_KEY,
   useGovAPI: false, // 공공 클라우드 API 사용 (선택)
   subModules: '', // 서브모듈 (선택)
 })
@@ -39,8 +39,7 @@ Vue.use(VuePageTitle, {
   prefix: 'Happy House | ',
   router,
 })
-Vue.use(vueGoogleMapWrapper, { apiKey: 'AIzaSyB6FYzXV_4wBKef7_bhyZVBHZGvNUV4U9Y' })
-
+Vue.use(vueGoogleMapWrapper, { apiKey: process.env.VUE_APP_GOOGLE_MAP_API_KEY })
 Vue.config.productionTip = false
 const nprogress = new NProgress({ parent: 'body' })
 
