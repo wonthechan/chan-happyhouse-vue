@@ -1,15 +1,2 @@
-### Clean UI Pro Vue Admin Template Preview ###
-https://vue.cleanui.cloud
-
-### Documentation ###
-Please read documentation here https://docs.sellpixels.com
-
-### Quick Start ###
-* Install latest node.js: https://nodejs.org​
-* Install latest yarn package manager: https://yarnpkg.com/​
-* Install node modules by running terminal command `yarn install`
-* Run the app `yarn serve`
-* Or build production app `yarn build`
-
-### Support ###
-Use GitHub Issues for tracking bugs and creating new feature requests or write to [support@sellpixels.com](mailto:support@sellpixels.com).
+아파트/주택 거래 정보 조회 및 부가 정보 제공 서비스 입니다.
+[작성 중]
